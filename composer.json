@@ -1,0 +1,16 @@
+{
+  "name": "aliftrd/pedo-backend",
+  "description": "Backend for PEDO App",
+  "type": "project",
+  "authors": [
+    {
+      "name": "Alif Triadi Agung W",
+      "email": "aliftriadi.gaming@gmail.com"
+    }
+  ],
+  "require": {
+    "rakit/validation": "dev-master"
+  },
+  "license": "MIT",
+  "minimum-stability": "dev"
+}
