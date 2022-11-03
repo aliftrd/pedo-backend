@@ -48,12 +48,12 @@ try {
     $user = $db->query($query)->fetch();
     unset($user['password']);
 
-    return success_response('Berhasil membuat user', [
+    return success_response('Akun berhasil dibuat', [
         'user' => $user,
     ], 201);
 } catch (\PDOException $e) {
     if ($e->getCode() == 23000) {
-        return error_response('E-mail already used', null, 409);
+        return error_response('E-mail sudah digunakan', null, 409);
     }
 
     return error_response($e->getMessage(), null, 500);

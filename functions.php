@@ -60,3 +60,37 @@ if (!function_exists('base_url')) {
         return (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://{$_SERVER['HTTP_HOST']}/{$uri}";
     }
 }
+
+// if (!function_exists('get_bearer_token')) {
+//     function get_bearer_token()
+//     {
+//         $headers = apache_request_headers();
+//         if ($headers['Authorization']) {
+//             $authorization = explode(" ", $headers['Authorization']);
+//             if ($authorization[0] !== 'Bearer') {
+//                 return [
+//                     'status' => false,
+//                     'message' => 'Authorization type invalid'
+//                 ];
+//             }
+//             return [
+//                 'status' => true,
+//                 'message' => $authorization[1]
+//             ];
+//         }
+//         // Return need header authorization
+//         return [
+//             'status' => false,
+//             'message' => 'Authorization needed'
+//         ];
+//     }
+// }
+
+// if (!function_exists('check_is_valid_user')) {
+//     function check_is_valid_user(string $token)
+//     {
+//         global $db;
+//         $query = "SELECT * FROM users WHERE id = (SELECT user_id FROM user_access_tokens WHERE token = '{$token}' LIMIT 1)";
+//         return $db->query($query)->fetch();
+//     }
+// }
