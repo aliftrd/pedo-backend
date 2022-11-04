@@ -6,12 +6,11 @@ use Models\User;
 use Models\UserAccessToken;
 use Rakit\Validation\Validator;
 
-if (count($_POST) < 1) {
-    $_POST = json_decode(file_get_contents('php://input'), true) ?? [];
-}
-
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'POST':
+        if (count($_POST) < 1) {
+            $_POST = json_decode(file_get_contents('php://input'), true) ?? [];
+        }
         $validator = new Validator;
         $validation = $validator->validate($_POST, [
             'email' => 'required|email',

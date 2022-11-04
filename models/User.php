@@ -25,9 +25,4 @@ class User extends Model
     protected $hidden = [
         'password',
     ];
-
-    public function getCreatedAtAttribute()
-    {
-        return $this->attributes['created_at'];
-    }
 }
