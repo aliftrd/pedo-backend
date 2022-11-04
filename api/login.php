@@ -1,8 +1,9 @@
 <?php
 header("Content-Type: application/json");
-require_once '../config.php';
-require_once '../vendor/autoload.php';
+require_once('../vendor/autoload.php');
 
+use Models\User;
+use Models\UserAccessToken;
 use Rakit\Validation\Validator;
 
 if (count($_POST) < 1) {
@@ -23,12 +24,10 @@ switch ($_SERVER['REQUEST_METHOD']) {
             return error_response('Error Validasi', $errors->firstOfAll(), 400);
         }
 
-
         $email = $_POST['email'];
         $password = $_POST['password'];
 
-        $query = "SELECT * FROM users WHERE email = '{$email}' LIMIT 1";
-        $user = $db->query($query)->fetch(\PDO::FETCH_ASSOC);
+        $user = User::where('email', $email)->first();
 
         if (!$user || !password_verify($password, $user['password']) || !is_null($user['deleted_at'])) {
             return error_response('Kredensial tidak valid', null, 401);
@@ -38,13 +37,15 @@ switch ($_SERVER['REQUEST_METHOD']) {
         $user_agent = base64_encode($_SERVER['HTTP_USER_AGENT']);
         $timestamps = epoch_time();
 
-        $query = "INSERT INTO user_access_tokens VALUES (NULL, '{$user['id']}', '{$token}', '{$user_agent}', '{$timestamps}', '{$timestamps}')";
-        $db->prepare($query)->execute();
+        UserAccessToken::create([
+            'user_id' => $user->id,
+            'token' => $token,
+            'user_agent' => $user_agent,
+            'created_at' => $timestamps,
+            'updated_at' => $timestamps,
+        ]);
 
-        unset($user['password']);
-        return success_response('Berhasil login', compact('token', 'user'), 200);
+        return success_response('Berhasil login', compact('token', 'user'));
     default:
-        echo 'Method Not Allowed';
-        http_response_code(404);
-        return;
+        return error_response('Method Not Allowed');
 }

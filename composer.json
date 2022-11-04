@@ -8,6 +8,14 @@
       "email": "aliftriadi.gaming@gmail.com"
     }
   ],
+  "autoload": {
+    "psr-4": {
+      "Models\\": "models/"
+    },
+    "files": [
+      "functions.php"
+    ]
+  },
   "require": {
     "rakit/validation": "dev-master",
     "illuminate/database": "9.x-dev",

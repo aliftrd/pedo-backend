@@ -1,25 +1,18 @@
 <?php
 header("Content-Type: application/json");
-require_once '../config.php';
+require_once('../vendor/autoload.php');
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    http_response_code(404);
-    return;
-}
+use Models\UserAccessToken;
 
-$headers = apache_request_headers();
+switch ($_SERVER['REQUEST_METHOD']) {
+    case 'POST':
+        $authorization = get_bearer_token();
+        if (!$authorization['status']) {
+            return error_response($authorization['message'], null, 401);
+        }
 
-if ($headers['Authorization']) {
-    $authorization = explode(" ", $headers['Authorization']);
-    if ($authorization[0] !== 'Bearer') {
-        return error_response('Authorization type invalid', null, 401);
-    }
-
-    $token = $authorization[1];
-    $query = "DELETE FROM user_access_tokens WHERE token = :token";
-    $requestDB = $db->prepare($query);
-    $requestDB->bindValue(':token', $token, \PDO::PARAM_STR);
-    $requestDB->execute();
-
-    return success_response('Berhasil keluar', null, 200);
+        UserAccessToken::where('token', $authorization['message'])->delete();
+        return success_response('Berhasil keluar', null, 200);
+    default:
+        return error_response('Method Not Allowed');
 }

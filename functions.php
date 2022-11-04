@@ -1,7 +1,7 @@
 <?php
 
 if (!function_exists('response_json')) {
-    function response_json(array $data, int $code = 200): void
+    function response_json(mixed $data, int $code = 200): void
     {
         header("Content-Type: application/json");
         echo json_encode($data);
@@ -33,7 +33,7 @@ if (!function_exists('epoch_time')) {
 }
 
 if (!function_exists('success_response')) {
-    function success_response(string $message, array $data = null, int $code = 200)
+    function success_response(string $message, mixed $data = null, int $code = 200)
     {
         return response_json([
             'code' => $code,
@@ -44,7 +44,7 @@ if (!function_exists('success_response')) {
 }
 
 if (!function_exists('error_response')) {
-    function error_response(string $message, array $errors = null, int $code = 404)
+    function error_response(string $message, mixed $errors = null, int $code = 404)
     {
         return response_json([
             'code' => $code,
@@ -61,30 +61,30 @@ if (!function_exists('base_url')) {
     }
 }
 
-// if (!function_exists('get_bearer_token')) {
-//     function get_bearer_token()
-//     {
-//         $headers = apache_request_headers();
-//         if ($headers['Authorization']) {
-//             $authorization = explode(" ", $headers['Authorization']);
-//             if ($authorization[0] !== 'Bearer') {
-//                 return [
-//                     'status' => false,
-//                     'message' => 'Authorization type invalid'
-//                 ];
-//             }
-//             return [
-//                 'status' => true,
-//                 'message' => $authorization[1]
-//             ];
-//         }
-//         // Return need header authorization
-//         return [
-//             'status' => false,
-//             'message' => 'Authorization needed'
-//         ];
-//     }
-// }
+if (!function_exists('get_bearer_token')) {
+    function get_bearer_token()
+    {
+        $headers = apache_request_headers();
+        if ($headers['Authorization']) {
+            $authorization = explode(" ", $headers['Authorization']);
+            if ($authorization[0] !== 'Bearer') {
+                return [
+                    'status' => false,
+                    'message' => 'Authorization type invalid'
+                ];
+            }
+            return [
+                'status' => true,
+                'message' => $authorization[1]
+            ];
+        }
+        // Return need header authorization
+        return [
+            'status' => false,
+            'message' => 'Authorization needed'
+        ];
+    }
+}
 
 // if (!function_exists('check_is_valid_user')) {
 //     function check_is_valid_user(string $token)

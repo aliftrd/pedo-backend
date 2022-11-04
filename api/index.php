@@ -1,6 +1,8 @@
 <?php
+require_once('../vendor/autoload.php');
 
-require '../models/Admin.php';
+use Models\Admin;
+
 $admin = Admin::find(2);
 echo '<pre>';
 echo $admin;

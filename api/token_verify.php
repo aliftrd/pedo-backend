@@ -1,6 +1,8 @@
 <?php
 header('Content-Type: application/json');
-require_once '../config.php';
+require_once('../vendor/autoload.php');
+
+use Models\UserAccessToken;
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'POST':
@@ -9,15 +11,12 @@ switch ($_SERVER['REQUEST_METHOD']) {
             return error_response($authorization['message'], null, 401);
         }
 
-        $token = $authorization['message'];
-        $user = check_is_valid_user($token);
-        if (is_null($user) || !$user) {
+        $user = UserAccessToken::where('token', $authorization['message'])->count();
+        if ($user < 1) {
             return error_response('Kredensial tidak valid', null, 401);
         }
 
         return success_response('Berhasil mengambil user', compact('token', 'user'), 200);
     default:
-        echo 'Method Not Allowed';
-        http_response_code(404);
-        return;
+        return error_response('Method Not Allowed');
 }

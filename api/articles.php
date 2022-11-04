@@ -1,17 +1,28 @@
 <?php
 header('Content-Type: application/json');
-require '../models/User.php';
-require '../models/Article.php';
-require '../functions.php';
+require_once('../vendor/autoload.php');
+
+use Models\Article;
+use Models\UserAccessToken;
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
+        $authorization = get_bearer_token();
+        if (!$authorization['status']) {
+            return error_response($authorization['message'], null, 401);
+        }
+
+        $user = UserAccessToken::where('token', $authorization['message'])->count();
+        if ($user < 1) {
+            return error_response('Kredensial tidak valid', null, 401);
+        }
+
         $articles = Article::with(['admin', 'categories']);
         if (isset($_GET['limit'])) {
             $limit = $_GET['limit'];
             $articles->limit($limit);
         }
-        $articles->get();
+        $articles = $articles->get();
 
         return success_response('Berhasil mengambil data', compact('articles'));
     default:

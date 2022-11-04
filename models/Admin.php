@@ -1,11 +1,17 @@
 <?php
-require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
-require $_SERVER['DOCUMENT_ROOT'] . '/connection.php';
+
+namespace Models;
+
+require_once($_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/connection.php');
 
 use \Illuminate\Database\Eloquent\Model;
+use Models\Article;
 
 class Admin extends Model
 {
+    public $timestamps = false;
+
     protected $fillable = [
         'name',
         'email',
@@ -16,5 +22,8 @@ class Admin extends Model
         'password',
     ];
 
-    public $timestamps = false;
+    public function articles()
+    {
+        return $this->hasMany(Article::class);
+    }
 }
