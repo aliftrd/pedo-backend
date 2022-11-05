@@ -32,6 +32,13 @@ if (!function_exists('epoch_time')) {
     }
 }
 
+if (!function_exists('epoch_to_second')) {
+    function epoch_to_second($value)
+    {
+        return round($value / 1000);
+    }
+}
+
 if (!function_exists('success_response')) {
     function success_response(string $message, mixed $data = null, int $code = 200)
     {
