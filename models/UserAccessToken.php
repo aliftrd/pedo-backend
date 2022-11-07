@@ -2,8 +2,8 @@
 
 namespace Models;
 
-require_once(realpath('vendor/autoload.php'));
-require_once(realpath('connection.php'));
+require_once($_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/connection.php');
 
 use \Illuminate\Database\Eloquent\Model;
 
