@@ -21,7 +21,7 @@ Aplikasi ini secara basis menggunakan library Eloquent ORM milik laravel [illumi
 <?php
 require_once('../vendor/autoload.php');
 
-use Models/User;
+use Models\User;
 
 $user = User::get();
 ...
