@@ -16,6 +16,8 @@ class Admin extends Model
         'name',
         'email',
         'password',
+        'image',
+        'level'
     ];
 
     protected $hidden = [
@@ -25,5 +27,10 @@ class Admin extends Model
     public function articles()
     {
         return $this->hasMany(Article::class);
+    }
+
+    public function getImageAttribute($value)
+    {
+        return base_url('storage/images/admin/avatar/' . $value);
     }
 }

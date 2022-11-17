@@ -10,7 +10,8 @@
   ],
   "autoload": {
     "psr-4": {
-      "Models\\": "models/"
+      "Models\\": "models/",
+      "Helper\\": "helper/"
     },
     "files": [
       "functions.php"
