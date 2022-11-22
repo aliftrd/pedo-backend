@@ -1,8 +1,10 @@
 <?php
+session_start();
 require_once('vendor/autoload.php');
 
 use Illuminate\Support\Facades\Auth;
 use Rakit\Validation\Validator;
+use Helper\Flash;
 use Models\Admin;
 
 
@@ -17,7 +19,8 @@ switch ($_SERVER['REQUEST_METHOD']) {
         if ($validation->fails()) {
             $errors = $validation->errors();
 
-            return error_response('Error Validasi', $errors->firstOfAll(), 400);
+            Flash::setFlash('error', $errors->firstOfAll()[array_key_first($errors->firstOfAll())]);
+            break;
         }
 
         $email = $_POST['email'];
@@ -25,22 +28,21 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
         $user = Admin::where('email', $email)->first();
 
-        if (password_verify($password, $user->password)) {
-            session_start();
+        if (!is_null($user) && password_verify($password, $user->password)) {
             $_SESSION['auth'] = $user->id;
 
-            // $user = Admin::find($_SESSION['auth']);
-            // echo $user;
             header('Location: ' . base_url('home.php'));
         } else {
-            echo "
-            <script>
-            alert('Kredensial tidak valid');
-            </script>
-            ";
+            Flash::setFlash('error', 'Kredensial tidak valid');
+        }
+        break;
+    case 'GET':
+        if (isset($_SESSION['auth'])) {
+            header('Location: ' . base_url('home.php'));
         }
         break;
     default:
+        return error_response('Method not allowed');
 }
 ?>
 
@@ -54,7 +56,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
     <meta name="description" content="Responsive Admin Dashboard Template">
     <meta name="keywords" content="admin,dashboard">
     <meta name="author" content="stacks">
-    <!-- The above 6 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!-- The above 6 meta tags *must* come first in the head; any other head cpassword_verify($password, $user->password)ontent must come *after* these tags -->
 
     <!-- Title -->
     <title>Login</title>
@@ -86,21 +88,24 @@ switch ($_SERVER['REQUEST_METHOD']) {
                     <div class="card login-box">
                         <div class="card-body">
                             <h5 class="card-title">Sign In</h5>
+
+                            <?php if (Flash::has('error')) : ?>
+                            <div class="alert alert-danger"><?= Flash::display('error') ?></div>
+                            <?php endif; ?>
                             <form method="post" id="formlogin">
                                 <div class="form-group">
                                     <input type="email" name="email" id="email" class="form-control" required
-                                        placeholder="Email" oninvalid="this.setCustomValidity('Enter email here')"
-                                        oninput="this.setCustomValidity('')">
+                                        placeholder="Email">
                                 </div>
                                 <div class="form-group">
                                     <input type="password" name="pass" id="pass" class="form-control" required
-                                        placeholder="Password" oninvalid="this.setCustomValidity('Enter password here')"
-                                        oninput="this.setCustomValidity('')">
+                                        placeholder="Password">
                                 </div>
                                 <class="btn btn-primary float-right m-l-xxs>
                                     <input type="submit" name="Login" class="btn btn-primary float-right m-l-xxs">
                                     </class=>
                             </form>
+
                         </div>
                     </div>
                 </div>
