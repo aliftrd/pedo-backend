@@ -14,17 +14,16 @@
     <title>Dashboard</title>
 
     <!-- Styles -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/plugins/font-awesome/css/all.min.css" rel="stylesheet">
-    <link href="assets/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <link href="<?= base_url('assets/plugins/bootstrap/css/bootstrap.min.css') ?>" rel="stylesheet">
+    <link href="<?= base_url('assets/plugins/font-awesome/css/all.min.css') ?>" rel="stylesheet">
+    <link href="<?= base_url('assets/plugins/toastr/toastr.min.css') ?>" rel="stylesheet">
 
 
     <!-- Theme Styles -->
-    <link href="assets/css/lime.min.css" rel="stylesheet">
-    <link href="assets/css/custom.css" rel="stylesheet">
+    <link href="<?= base_url('assets/css/lime.min.css') ?>" rel="stylesheet">
+    <link href="<?= base_url('assets/css/custom.css') ?>" rel="stylesheet">
 </head>
 
 <body>
@@ -34,5 +33,5 @@
         </div>
     </div>
 
-    <?php include('template/sidebar.inc.php'); ?>
-    <?php include('template/topbar.inc.php'); ?>
+    <?php include($_SERVER['DOCUMENT_ROOT'] . '/template/sidebar.inc.php'); ?>
+    <?php include($_SERVER['DOCUMENT_ROOT'] . '/template/topbar.inc.php'); ?>
