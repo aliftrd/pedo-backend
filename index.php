@@ -15,6 +15,7 @@ $faqs = Faq::get();
     <link rel="stylesheet" href="<?= base_url('assets/landing/bootstrap/css/bootstrap.min.css') ?>">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bebas+Neue&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins&amp;display=swap">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/landing/css/styles.min.css') ?>">
 </head>
 
@@ -41,7 +42,9 @@ $faqs = Faq::get();
                         <p class="paragraph my-3">Pet Adoption hadir dalam bentuk aplikasi yang dapat dengan mudah kamu unduh dengan tombol download dibawah<br></p><a class="btn btn-lg btn-dark me-2" role="button" href="#">Download</a>
                     </div>
                 </div>
-                <div class="col-md-6"><img class="rounded img-fluid w-100 fit-cover" src="<?= base_url('assets/landing/img/hero-1.svg') ?>" style="pointer-events: none;"></div>
+                <div class="col-md-6">
+                    <img class="rounded img-fluid w-100 fit-cover" data-aos="zoom-out-left" data-aos-duration="1000" data-aos-offset="300" data-aos-easing="ease-in-sine" src="<?= base_url('assets/landing/img/hero-1.svg') ?>" style="pointer-events: none;">
+                </div>
             </div>
         </div><img id="hero-bg" class="img-fluid fit-cover" src="<?= base_url('assets/landing/img/about-particle.svg') ?>">
     </div>
@@ -55,7 +58,9 @@ $faqs = Faq::get();
                         <p class="paragraph my-3">Kami membuat aplikasi ini untuk seluruh pecinta hewan yang ingin mempunyai hewan peliharaannya, dan juga untuk pemilik rumah hewan yang ingin hewannya diadopsi orang lain.<br></p>
                     </div>
                 </div>
-                <div class="col-md-6"><img class="rounded img-fluid w-100 fit-cover" src="<?= base_url('assets/landing/img/about.svg') ?>" style="pointer-events: none;"></div>
+                <div class="col-md-6">
+                    <img class="rounded img-fluid w-100 fit-cover" data-aos="zoom-out-right" data-aos-duration="1000" data-aos-offset="300" data-aos-easing="ease-in-sine" src="<?= base_url('assets/landing/img/about.svg') ?>" style="pointer-events: none;">
+                </div>
             </div>
         </div><img id="about-bg" class="img-fluid fit-cover w-auto" src="<?= base_url('assets/landing/img/bg-about.svg') ?>">
     </div>
@@ -213,7 +218,11 @@ $faqs = Faq::get();
         </div>
     </footer>
     <script src="<?= base_url('assets/landing/bootstrap/js/bootstrap.min.js') ?>"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="<?= base_url('assets/landing/js/script.min.js') ?>"></script>
+    <script type="text/javascript">
+        AOS.init();
+    </script>
 </body>
 
 </html>
