@@ -29,7 +29,7 @@ $faqs = Faq::get();
                                 <h5 class="card-title">FAQ</h5>
                                 <a href="<?= base_url('faq/tambah.php') ?>" class="btn btn-primary">Tambah</a>
                             </div>
-                            <table class="table">
+                            <table class="table table-borderless">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
