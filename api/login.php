@@ -40,8 +40,6 @@ switch ($_SERVER['REQUEST_METHOD']) {
             'user_id' => $user->id,
             'token' => $token,
             'user_agent' => $user_agent,
-            'created_at' => $timestamps,
-            'updated_at' => $timestamps,
         ]);
 
         return success_response('Berhasil login', compact('token', 'user'));
