@@ -24,6 +24,6 @@ class Article extends Model
 
     public function getThumbnailAttribute($value)
     {
-        return base_url('storage/images/' . $value);
+        return base_url('storage/images/articles/thumbnail/' . $value);
     }
 }
