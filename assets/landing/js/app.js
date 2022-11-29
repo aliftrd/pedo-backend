@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
   window.onscroll = function () {
-    console.log("scrolling");
     let navbar = document.querySelector("nav.navbar");
     if (
       document.body.scrollTop > 50 ||

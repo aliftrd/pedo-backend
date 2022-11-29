@@ -7,17 +7,12 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/connection.php');
 
 use \Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class UserMeta extends Model
 {
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'image',
-        'level',
-    ];
+    protected $fillable = [];
 
-    protected $hidden = [
-        'password',
-    ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

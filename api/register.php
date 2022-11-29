@@ -27,7 +27,6 @@ switch ($_SERVER['REQUEST_METHOD']) {
         $name = trim($_POST['name']);
         $email = trim($_POST['email']);
         $password = password_hash(trim($_POST['password']), PASSWORD_BCRYPT);
-        $timestamps = epoch_time();
 
         try {
             $user = User::create([
@@ -36,8 +35,6 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 'password' => $password,
                 'image' => 'default.jpg',
                 'level' => 'petfinder',
-                'created_at' => $timestamps,
-                'updated_at' => $timestamps,
             ]);
 
             return success_response('Akun berhasil dibuat', compact('user'), 201);

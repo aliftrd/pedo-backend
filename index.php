@@ -46,12 +46,13 @@ $faqs = Faq::get();
             <div class="row gy-4 gy-md-0">
                 <div class="col-md-6 text-center text-md-start d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-md-start align-items-md-center justify-content-xl-center">
                     <div style="max-width: 350px;">
-                        <h1 class="text-uppercase hero-title">Dapatkan hewan peliharaanmu sekarang</h1>
-                        <p class="paragraph my-3">Pet Adoption hadir dalam bentuk aplikasi yang dapat dengan mudah kamu unduh dengan tombol download dibawah<br></p><a class="btn btn-lg btn-dark me-2" role="button" href="#">Download</a>
+                        <h1 class="text-uppercase hero-title" data-aos="zoom-out-right" data-aos-duration="400" data-aos-easing="ease-in-sine">Dapatkan hewan peliharaanmu sekarang</h1>
+                        <p class="paragraph my-3" data-aos="zoom-out-right" data-aos-duration="600" data-aos-easing="ease-in-sine">Pet Adoption hadir dalam bentuk aplikasi yang dapat dengan mudah kamu unduh dengan tombol download dibawah<br></p>
+                        <a class="btn btn-lg btn-dark me-2" role="button" href="#" data-aos="zoom-out-right" data-aos-duration="800" data-aos-easing="ease-in-sine">Download</a>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <img class="rounded img-fluid w-100 fit-cover" data-aos="zoom-out-left" data-aos-duration="1000" data-aos-offset="300" data-aos-easing="ease-in-sine" src="<?= base_url('assets/landing/img/hero-1.svg') ?>" style="pointer-events: none;">
+                    <img class="rounded img-fluid w-100 fit-cover" data-aos="zoom-out-left" data-aos-duration="800" data-aos-offset="300" data-aos-easing="ease-in-sine" src="<?= base_url('assets/landing/img/hero-1.svg') ?>" style="pointer-events: none;">
                 </div>
             </div>
         </div><img id="hero-bg" class="img-fluid fit-cover" src="<?= base_url('assets/landing/img/about-particle.svg') ?>">
@@ -61,13 +62,13 @@ $faqs = Faq::get();
             <div class="row gy-4 gy-md-0 flex-row-reverse">
                 <div class="col-md-6 d-md-flex align-items-md-center">
                     <div class="pl-5" style="max-width: 414px;">
-                        <p class="pre-title my-3">About Us</p>
-                        <h1 class="text-uppercase title">TENTANG PET ADOPTION</h1>
-                        <p class="paragraph my-3">Kami membuat aplikasi ini untuk seluruh pecinta hewan yang ingin mempunyai hewan peliharaannya, dan juga untuk pemilik rumah hewan yang ingin hewannya diadopsi orang lain.<br></p>
+                        <p class="pre-title my-3" data-aos="zoom-out-left" data-aos-duration="400" data-aos-easing="ease-in-sine">About Us</p>
+                        <h1 class="text-uppercase title" data-aos="zoom-out-left" data-aos-duration="600" data-aos-easing="ease-in-sine">TENTANG PET ADOPTION</h1>
+                        <p class="paragraph my-3" data-aos="zoom-out-left" data-aos-duration="800" data-aos-easing="ease-in-sine">Kami membuat aplikasi ini untuk seluruh pecinta hewan yang ingin mempunyai hewan peliharaannya, dan juga untuk pemilik rumah hewan yang ingin hewannya diadopsi orang lain.<br></p>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <img class="rounded img-fluid w-100 fit-cover" data-aos="zoom-out-right" data-aos-duration="1000" data-aos-offset="300" data-aos-easing="ease-in-sine" src="<?= base_url('assets/landing/img/about.svg') ?>" style="pointer-events: none;">
+                    <img class="rounded img-fluid w-100 fit-cover" data-aos="zoom-out-right" data-aos-duration="800" data-aos-offset="300" data-aos-easing="ease-in-sine" src="<?= base_url('assets/landing/img/about.svg') ?>" style="pointer-events: none;">
                 </div>
             </div>
         </div><img id="about-bg" class="img-fluid fit-cover w-auto" src="<?= base_url('assets/landing/img/bg-about.svg') ?>">
@@ -77,22 +78,22 @@ $faqs = Faq::get();
             <div class="row gy-4 gy-md-0">
                 <div class="col-md-6 d-md-flex align-items-md-center">
                     <div class="pl-5" style="max-width: 414px;">
-                        <p class="pre-title my-3">Service</p>
-                        <h1 class="text-uppercase title">LAYANAN YANG KAMI BERIKAN</h1>
-                        <p class="paragraph my-3">Untuk membantu para pengguna aplikasi Pet Adoption. Kami memberikan beberapa pelayanan sehingga masalah yang dialami oleh pengguna dapat teratasi dan terselesaikan<br></p>
+                        <p class="pre-title my-3" data-aos="zoom-out-right" data-aos-duration="400" data-aos-easing="ease-in-sine">Service</p>
+                        <h1 class="text-uppercase title" data-aos="zoom-out-right" data-aos-duration="600" data-aos-easing="ease-in-sine">LAYANAN YANG KAMI BERIKAN</h1>
+                        <p class="paragraph my-3" data-aos="zoom-out-right" data-aos-duration="800" data-aos-easing="ease-in-sine">Untuk membantu para pengguna aplikasi Pet Adoption. Kami memberikan beberapa pelayanan sehingga masalah yang dialami oleh pengguna dapat teratasi dan terselesaikan<br></p>
                     </div>
                 </div>
                 <div class="col-md-6 gap-3">
                     <div class="row">
                         <div class="col-md-6 p-0">
-                            <div class="card service-card m-3">
+                            <div class="card service-card m-3" data-aos="zoom-out-left" data-aos-duration="400" data-aos-offset="30" data-aos-easing="ease-in-sine">
                                 <div class="card-body text-center"><img class="img-fluid" src="<?= base_url('assets/landing/img/health_shield.svg') ?>" loading="lazy">
                                     <p class="fw-semibold mt-2">Jaminan Kesehatan</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 p-0">
-                            <div class="card service-card m-3">
+                            <div class="card service-card m-3" data-aos="zoom-out-left" data-aos-duration="400" data-aos-offset="30" data-aos-easing="ease-in-sine">
                                 <div class="card-body text-center"><img class="img-fluid" src="<?= base_url('assets/landing/img/24_hours.svg') ?>" loading="lazy">
                                     <p class="fw-semibold mt-2">Costumer<br>Support</p>
                                 </div>
@@ -101,14 +102,14 @@ $faqs = Faq::get();
                     </div>
                     <div class="row">
                         <div class="col-md-6 p-0">
-                            <div class="card service-card m-3">
+                            <div class="card service-card m-3" data-aos="zoom-out-left" data-aos-duration="400" data-aos-offset="30" data-aos-easing="ease-in-sine">
                                 <div class="card-body text-center"><img class="img-fluid" src="<?= base_url('assets/landing/img/articles.svg') ?>" loading="lazy">
                                     <p class="fw-semibold mt-2">Layanan<br>Edukasi</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 p-0">
-                            <div class="card service-card m-3">
+                            <div class="card service-card m-3" data-aos="zoom-out-left" data-aos-duration="400" data-aos-offset="30" data-aos-easing="ease-in-sine">
                                 <div class="card-body text-center"><img class="img-fluid" src="<?= base_url('assets/landing/img/credit_fill.svg') ?>" loading="lazy">
                                     <p class="fw-semibold mt-2">Pembayaran<br>Anti Ribet</p>
                                 </div>
@@ -179,7 +180,7 @@ $faqs = Faq::get();
                 <div class="col">
                     <div class="card testimonials-card">
                         <div class="card-body p-4">
-                            <p class="card-text paragraph">Dari pet Adoption ini saya juga dapat membaca informasi dari hewan sehingga saya dapat mengetahui apa yang terbaik untuk hewan saya<br></p>
+                            <p class="card-text paragraph">Dari sini saya juga dapat membaca informasi, sehingga saya dapat mengetahui apa yang terbaik untuk hewan saya<br></p>
                             <div class="d-flex testimonials-profile"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="<?= base_url('assets/landing/img/user-3.png') ?>">
                                 <p class="user-testi mb-0">Vannesa Christian</p>
                             </div>
