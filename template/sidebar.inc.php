@@ -8,7 +8,7 @@
                 <a href="<?= base_url('home.php') ?>"><i class="material-icons">dashboard</i>Dashboard</a>
             </li>
             <li>
-                <a href="<?= base_url('crudadmin.php') ?>"><i class="material-icons">person_outline</i>Profile</a>
+                <a href="<?= base_url('admin') ?>"><i class="material-icons">person_outline</i>Profile</a>
             </li>
             <li>
                 <a href="<?= base_url('forms.php') ?>"><i class="material-icons">inbox</i>Mailbox</a>
@@ -20,10 +20,20 @@
                 <a href="file-manager.html"><i class="material-icons">cloud_queue</i>File Manager</a>
             </li>
             <li class="sidebar-title">
-                UI Elements
+                Fitur
             </li>
             <li>
-                <a href="#"><i class="material-icons">text_format</i>Styles<i class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
+                <a href=""><i class="material-icons">apps</i>Master<i
+                        class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="<?= base_url('admin') ?>"><i class="material-icons">person_outline</i>Master Admin</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><i class="material-icons">text_format</i>Styles<i
+                        class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
                 <ul class="sub-menu">
                     <li>
                         <a href="styles-typography.html">Typography</a>
@@ -40,66 +50,8 @@
                 </ul>
             </li>
             <li>
-                <a href=""><i class="material-icons">apps</i>Components<i class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
-                <ul class="sub-menu">
-                    <li>
-                        <a href="ui-alerts.html">Alerts</a>
-                    </li>
-                    <li>
-                        <a href="ui-badge.html">Badge</a>
-                    </li>
-                    <li>
-                        <a href="ui-breadcrumb.html">Breadcrumb</a>
-                    </li>
-                    <li>
-                        <a href="ui-buttons.html">Buttons</a>
-                    </li>
-                    <li>
-                        <a href="ui-button-group.html">Button Group</a>
-                    </li>
-                    <li>
-                        <a href="ui-card.html">Card</a>
-                    </li>
-                    <li>
-                        <a href="ui-collapse.html">Collapse</a>
-                    </li>
-                    <li>
-                        <a href="ui-dropdowns.html">Dropdowns</a>
-                    </li>
-                    <li>
-                        <a href="ui-list-group.html">List Group</a>
-                    </li>
-                    <li>
-                        <a href="ui-media-object.html">Media Object</a>
-                    </li>
-                    <li>
-                        <a href="ui-modal.html">Modal</a>
-                    </li>
-                    <li>
-                        <a href="ui-navs.html">Navs</a>
-                    </li>
-                    <li>
-                        <a href="ui-pagination.html">Pagination</a>
-                    </li>
-                    <li>
-                        <a href="ui-popovers.html">Popovers</a>
-                    </li>
-                    <li>
-                        <a href="ui-progress.html">Progress</a>
-                    </li>
-                    <li>
-                        <a href="ui-spinners.html">Spinners</a>
-                    </li>
-                    <li>
-                        <a href="ui-toast.html">Toast</a>
-                    </li>
-                    <li>
-                        <a href="ui-tooltips.html">Tooltips</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href=""><i class="material-icons">code</i>Plugins<i class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
+                <a href=""><i class="material-icons">code</i>Plugins<i
+                        class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
                 <ul class="sub-menu">
                     <li>
                         <a href="plugins-crop.html">Image Crop</a>
@@ -131,7 +83,8 @@
                 Other
             </li>
             <li>
-                <a href=""><i class="material-icons">star_border</i>Pages<i class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
+                <a href=""><i class="material-icons">star_border</i>Pages<i
+                        class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
                 <ul class="sub-menu">
                     <li>
                         <a href="<?= base_url('faq') ?>">Frequently Asked Questions</a>
