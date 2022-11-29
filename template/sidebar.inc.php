@@ -40,55 +40,13 @@
                 </ul>
             </li>
             <li>
-                <a href=""><i class="material-icons">apps</i>Components<i class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
+                <a href=""><i class="material-icons">apps</i>Data Hewan<i class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="ui-alerts.html">Alerts</a>
+                        <a href="<?= base_url('animal-types')?>">Tipe Hewan</a>
                     </li>
                     <li>
-                        <a href="ui-badge.html">Badge</a>
-                    </li>
-                    <li>
-                        <a href="ui-breadcrumb.html">Breadcrumb</a>
-                    </li>
-                    <li>
-                        <a href="ui-buttons.html">Buttons</a>
-                    </li>
-                    <li>
-                        <a href="ui-button-group.html">Button Group</a>
-                    </li>
-                    <li>
-                        <a href="ui-card.html">Card</a>
-                    </li>
-                    <li>
-                        <a href="ui-collapse.html">Collapse</a>
-                    </li>
-                    <li>
-                        <a href="ui-dropdowns.html">Dropdowns</a>
-                    </li>
-                    <li>
-                        <a href="ui-list-group.html">List Group</a>
-                    </li>
-                    <li>
-                        <a href="ui-media-object.html">Media Object</a>
-                    </li>
-                    <li>
-                        <a href="ui-modal.html">Modal</a>
-                    </li>
-                    <li>
-                        <a href="ui-navs.html">Navs</a>
-                    </li>
-                    <li>
-                        <a href="ui-pagination.html">Pagination</a>
-                    </li>
-                    <li>
-                        <a href="ui-popovers.html">Popovers</a>
-                    </li>
-                    <li>
-                        <a href="ui-progress.html">Progress</a>
-                    </li>
-                    <li>
-                        <a href="ui-spinners.html">Spinners</a>
+                        <a href="<?= base_url('animal-breeds')?>">Ras Hewan</a>
                     </li>
                     <li>
                         <a href="ui-toast.html">Toast</a>
