@@ -9,21 +9,19 @@ use Helper\Flash;
 use Models\AnimalType;
 use Rakit\Validation\Validator;
 
-if (isset($_POST['_method']) && $_POST['_method'] == 'PUT') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $validator = new Validator;
     $validation = $validator->validate($_POST, [
         'title' => 'required',
     ]);
 
-    AnimalType::find($_GET['id'])->update([
+    AnimalType::create([
         'title' => $_POST['title'],
     ]);
 
-    Flash::setFlash('success', 'Berhasil mengubah tipe hewan');
-    header('Location:' . base_url('animal-types/index.php'));
+    Flash::setFlash('success', 'Berhasil menambahkan tipe hewan');
+    header('Location:' . base_url('animals/types/index.php'));
 }
-
-$AnimalType = AnimalType::find($_GET['id']);
 ?>
 
 
@@ -36,12 +34,11 @@ $AnimalType = AnimalType::find($_GET['id']);
                     <div class="card">
                         <div class="card-body">
                             <form method="post">
-                                <input type="hidden" name="_method" value="PUT">
                                 <div class="form-group">
                                     <label for="title">Title</label>
-                                    <input type="text" class="form-control" id="title" name="title" value="<?= $AnimalType->title ?>" required>
+                                    <input type="text" class="form-control" id="title" name="title" required>
                                 </div>
-                                <button class="btn btn-primary">Simpan</button>
+                                <button class="btn btn-primary">Tambah</button>
                             </form>
                         </div>
                     </div>

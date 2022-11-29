@@ -6,9 +6,9 @@ if (!isset($_SESSION['auth'])) {
 }
 
 use Helper\Flash;
-use Models\AnimalType;
+use Models\AnimalBreed;
 
-$animalType = AnimalType::get();
+$animalBreed = AnimalBreed::get();
 ?>
 
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/template/header.inc.php') ?>
@@ -26,28 +26,28 @@ $animalType = AnimalType::get();
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center">
-                                <h5 class="card-title">Animal types</h5>
-                                <a href="<?= base_url('animal-types/tambah.php') ?>" class="btn btn-primary">Tambah</a>
+                                <h5 class="card-title">Ras Hewan</h5>
+                                <a href="<?= base_url('animals/breeds/tambah.php') ?>" class="btn btn-primary">Tambah</a>
                             </div>
                             <table class="table table-borderless">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Tipe Hewan</th>
+                                        <th>Ras hewan</th>
                                         <th>Tanggal Dibuat</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php if ($animalType->count() > 0) : ?>
-                                        <?php foreach ($animalType as $type) : ?>
+                                    <?php if ($animalBreed->count() > 0) : ?>
+                                        <?php foreach ($animalBreed as $type) : ?>
                                             <tr>
                                                 <td><?= $type->id ?></td>
                                                 <td><?= $type->title ?></td>
                                                 <td><?= $type->created_at ?></td>
                                                 <td>
-                                                    <a href="<?= base_url('animal-types/edit.php?id=' . $type->id) ?>" class="btn btn-sm btn-primary">Edit</a>
-                                                    <form action="<?= base_url('animal-types/hapus.php') ?>" method="POST" class="d-inline" onsubmit="return confirm('Anda yakin ingin menghapus?')">
+                                                    <a href="<?= base_url('animals/breeds/edit.php?id=' . $type->id) ?>" class="btn btn-sm btn-primary">Edit</a>
+                                                    <form action="<?= base_url('animals/breeds/hapus.php') ?>" method="POST" class="d-inline" onsubmit="return confirm('Anda yakin ingin menghapus?')">
                                                         <input type="hidden" name="_method" value="DELETE">
                                                         <input type="hidden" name="id" value="<?= $type->id ?>">
                                                         <button class="btn btn-danger"> Hapus</button>
