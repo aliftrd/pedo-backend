@@ -27,7 +27,7 @@ $animalBreed = AnimalBreed::get();
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center">
                                 <h5 class="card-title">Ras Hewan</h5>
-                                <a href="<?= base_url('animal-breeds/tambah.php') ?>" class="btn btn-primary">Tambah</a>
+                                <a href="<?= base_url('animals/breeds/tambah.php') ?>" class="btn btn-primary">Tambah</a>
                             </div>
                             <table class="table table-borderless">
                                 <thead>
@@ -46,8 +46,8 @@ $animalBreed = AnimalBreed::get();
                                                 <td><?= $type->title ?></td>
                                                 <td><?= $type->created_at ?></td>
                                                 <td>
-                                                    <a href="<?= base_url('animal-breeds/edit.php?id=' . $type->id) ?>" class="btn btn-sm btn-primary">Edit</a>
-                                                    <form action="<?= base_url('animal-breeds/hapus.php') ?>" method="POST" class="d-inline" onsubmit="return confirm('Anda yakin ingin menghapus?')">
+                                                    <a href="<?= base_url('animals/breeds/edit.php?id=' . $type->id) ?>" class="btn btn-sm btn-primary">Edit</a>
+                                                    <form action="<?= base_url('animals/breeds/hapus.php') ?>" method="POST" class="d-inline" onsubmit="return confirm('Anda yakin ingin menghapus?')">
                                                         <input type="hidden" name="_method" value="DELETE">
                                                         <input type="hidden" name="id" value="<?= $type->id ?>">
                                                         <button class="btn btn-danger"> Hapus</button>

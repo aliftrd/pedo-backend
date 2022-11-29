@@ -43,10 +43,10 @@
                 <a href=""><i class="material-icons">apps</i>Data Hewan<i class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="<?= base_url('animal-types')?>">Tipe Hewan</a>
+                        <a href="<?= base_url('animals/types') ?>">Tipe Hewan</a>
                     </li>
                     <li>
-                        <a href="<?= base_url('animal-breeds')?>">Ras Hewan</a>
+                        <a href="<?= base_url('animals/breeds') ?>">Ras Hewan</a>
                     </li>
                     <li>
                         <a href="ui-toast.html">Toast</a>

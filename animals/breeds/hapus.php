@@ -9,7 +9,7 @@ if (isset($_POST['_method']) && $_POST['_method'] == 'DELETE') {
     AnimalBreed::destroy($_POST['id']);
     Flash::setFlash('success', 'Berhasil menghapus tipe hewan');
 
-    header('Location:' . base_url('animal-breeds/index.php'));
+    header('Location:' . base_url('animals/breeds/index.php'));
 } else {
     return error_response('Method not allowed');
 }

@@ -20,7 +20,7 @@ if (isset($_POST['_method']) && $_POST['_method'] == 'PUT') {
     ]);
 
     Flash::setFlash('success', 'Berhasil mengubah tipe hewan');
-    header('Location:' . base_url('animal-types/index.php'));
+    header('Location:' . base_url('animals/types/index.php'));
 }
 
 $AnimalType = AnimalType::find($_GET['id']);

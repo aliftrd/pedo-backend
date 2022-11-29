@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ]);
 
     Flash::setFlash('success', 'Berhasil menambahkan tipe hewan');
-    header('Location:' . base_url('animal-breeds/index.php'));
+    header('Location:' . base_url('animals/breeds/index.php'));
 }
 ?>
 
