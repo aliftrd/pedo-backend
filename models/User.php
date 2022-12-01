@@ -20,4 +20,9 @@ class User extends Model
     protected $hidden = [
         'password',
     ];
+
+    public function getImageAttribute($value)
+    {
+        return base_url('storage/images/user/avatar/' . $value);
+    }
 }
