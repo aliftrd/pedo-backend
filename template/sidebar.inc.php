@@ -32,24 +32,6 @@
                 </ul>
             </li>
             <li>
-                <a href="#"><i class="material-icons">text_format</i>Styles<i
-                        class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
-                <ul class="sub-menu">
-                    <li>
-                        <a href="styles-typography.html">Typography</a>
-                    </li>
-                    <li>
-                        <a href="styles-code.html">Code</a>
-                    </li>
-                    <li>
-                        <a href="styles-tables.html">Tables</a>
-                    </li>
-                    <li>
-                        <a href="styles-icons.html">Icons</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
                 <a href=""><i class="material-icons">apps</i>Data Hewan<i
                         class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
                 <ul class="sub-menu">
@@ -58,12 +40,6 @@
                     </li>
                     <li>
                         <a href="<?= base_url('animals/breeds') ?>">Ras Hewan</a>
-                    </li>
-                    <li>
-                        <a href="ui-toast.html">Toast</a>
-                    </li>
-                    <li>
-                        <a href="ui-tooltips.html">Tooltips</a>
                     </li>
                 </ul>
             </li>
