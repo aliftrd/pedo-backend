@@ -12,6 +12,10 @@ class Article extends Model
 {
     public $timestamps = false;
 
+    protected $hidden = [
+        'admin_id',
+    ];
+
     public function admin()
     {
         return $this->belongsTo(Admin::class, 'admin_id', 'id');

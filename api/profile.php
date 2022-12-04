@@ -23,6 +23,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
         return success_response('Berhasil mengambil user', compact('token', 'user'), 200);
     case 'PUT':
+    case 'PATCH':
         parse_str(file_get_contents("php://input"), $_PUT);
 
         $validator = new Validator;
