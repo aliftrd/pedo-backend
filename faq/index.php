@@ -1,17 +1,11 @@
+<?php include($_SERVER['DOCUMENT_ROOT'] . '/template/header.inc.php') ?>
 <?php
-session_start();
-require_once($_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php');
-if (!isset($_SESSION['auth'])) {
-    header('Location:' . base_url('login.php'));
-}
 
 use Helper\Flash;
 use Models\Faq;
 
 $faqs = Faq::get();
 ?>
-
-<?php include($_SERVER['DOCUMENT_ROOT'] . '/template/header.inc.php') ?>
 <div class="lime-container">
     <div class="lime-body">
         <div class="container">
@@ -46,7 +40,7 @@ $faqs = Faq::get();
                                                 <td><?= $faq->title ?></td>
                                                 <td><?= $faq->created_at ?></td>
                                                 <td>
-                                                    <a href="<?= base_url('faq/edit.php?id=' . $faq->id) ?>" class="btn btn-sm btn-primary">Edit</a>
+                                                    <a href="<?= base_url('faq/edit.php?id=' . $faq->id) ?>" class="btn btn-sm btn-warning">Edit</a>
                                                     <form action="<?= base_url('faq/hapus.php') ?>" method="POST" class="d-inline" onsubmit="return confirm('Anda yakin ingin menghapus?')">
                                                         <input type="hidden" name="_method" value="DELETE">
                                                         <input type="hidden" name="id" value="<?= $faq->id ?>">

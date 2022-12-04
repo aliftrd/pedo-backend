@@ -1,9 +1,5 @@
+<?php include($_SERVER['DOCUMENT_ROOT'] . '/template/header.inc.php') ?>
 <?php
-session_start();
-require_once($_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php');
-if (!isset($_SESSION['auth'])) {
-    header('Location:' . base_url('login.php'));
-}
 
 use Helper\Flash;
 use Models\Faq;
@@ -16,21 +12,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         'deskripsi' => 'required',
     ]);
 
+    if ($validation->fails()) {
+        $errors = $validation->errors();
+
+        Flash::setFlash('error', $errors->firstOfAll()[array_key_first($errors->firstOfAll())]);
+        return header('Location:' . base_url('faq/tambah.php'));
+    }
+
     Faq::create([
         'title' => $_POST['judul'],
         'description' => $_POST['deskripsi'],
     ]);
 
     Flash::setFlash('success', 'Berhasil menambahkan FAQ');
-    header('Location:' . base_url('faq/index.php'));
+    return header('Location:' . base_url('faq/index.php'));
 }
 ?>
 
-
-<?php include($_SERVER['DOCUMENT_ROOT'] . '/template/header.inc.php') ?>
 <div class="lime-container">
     <div class="lime-body">
         <div class="container">
+            <?php include($_SERVER['DOCUMENT_ROOT'] . '/template/message.inc.php') ?>
             <div class="row">
                 <div class="col-md">
                     <div class="card">
@@ -42,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </div>
                                 <div class="form-group">
                                     <label for="deskripsi">Deskripsi</label>
-                                    <textarea name="deskripsi" id="deskripsi" class="form-control"></textarea>
+                                    <textarea name="deskripsi" id="deskripsi" class="form-control" required></textarea>
                                 </div>
                                 <button class="btn btn-primary">Tambah</button>
                             </form>
