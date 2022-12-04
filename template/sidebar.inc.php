@@ -8,7 +8,7 @@
                 <a href="<?= base_url('home.php') ?>"><i class="material-icons">dashboard</i>Dashboard</a>
             </li>
             <li>
-                <a href="<?= base_url('crudadmin.php') ?>"><i class="material-icons">person_outline</i>Profile</a>
+                <a href="<?= base_url('admin') ?>"><i class="material-icons">person_outline</i>Profile</a>
             </li>
             <li>
                 <a href="<?= base_url('forms.php') ?>"><i class="material-icons">inbox</i>Mailbox</a>
@@ -20,27 +20,20 @@
                 <a href="file-manager.html"><i class="material-icons">cloud_queue</i>File Manager</a>
             </li>
             <li class="sidebar-title">
-                UI Elements
+                Fitur
             </li>
             <li>
-                <a href="#"><i class="material-icons">text_format</i>Styles<i class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
+                <a href=""><i class="material-icons">apps</i>Master<i
+                        class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="styles-typography.html">Typography</a>
-                    </li>
-                    <li>
-                        <a href="styles-code.html">Code</a>
-                    </li>
-                    <li>
-                        <a href="styles-tables.html">Tables</a>
-                    </li>
-                    <li>
-                        <a href="styles-icons.html">Icons</a>
+                        <a href="<?= base_url('admin') ?>"><i class="material-icons">person_outline</i>Master Admin</a>
                     </li>
                 </ul>
             </li>
             <li>
-                <a href=""><i class="material-icons">apps</i>Data Hewan<i class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
+                <a href=""><i class="material-icons">apps</i>Data Hewan<i
+                        class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
                 <ul class="sub-menu">
                     <li>
                         <a href="<?= base_url('animals/types') ?>">Tipe Hewan</a>
@@ -48,16 +41,11 @@
                     <li>
                         <a href="<?= base_url('animals/breeds') ?>">Ras Hewan</a>
                     </li>
-                    <li>
-                        <a href="ui-toast.html">Toast</a>
-                    </li>
-                    <li>
-                        <a href="ui-tooltips.html">Tooltips</a>
-                    </li>
                 </ul>
             </li>
             <li>
-                <a href=""><i class="material-icons">code</i>Plugins<i class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
+                <a href=""><i class="material-icons">code</i>Plugins<i
+                        class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
                 <ul class="sub-menu">
                     <li>
                         <a href="plugins-crop.html">Image Crop</a>
@@ -89,7 +77,8 @@
                 Other
             </li>
             <li>
-                <a href=""><i class="material-icons">star_border</i>Pages<i class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
+                <a href=""><i class="material-icons">star_border</i>Pages<i
+                        class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
                 <ul class="sub-menu">
                     <li>
                         <a href="<?= base_url('faq') ?>">Frequently Asked Questions</a>
