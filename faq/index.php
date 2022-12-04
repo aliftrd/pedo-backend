@@ -9,14 +9,9 @@ $faqs = Faq::get();
 <div class="lime-container">
     <div class="lime-body">
         <div class="container">
+            <?php include($_SERVER['DOCUMENT_ROOT'] . '/template/message.inc.php') ?>
             <div class="row">
                 <div class="col-md">
-                    <?php if (Flash::has('success')) : ?>
-                        <div class="alert alert-success"><?= Flash::display('success') ?></div>
-                    <?php endif; ?>
-                    <?php if (Flash::has('error')) : ?>
-                        <div class="alert alert-danger"><?= Flash::display('error') ?></div>
-                    <?php endif; ?>
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center">
