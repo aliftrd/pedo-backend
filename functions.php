@@ -50,6 +50,13 @@ if (!function_exists('success_response')) {
     }
 }
 
+if (!function_exists('has_uploaded_file')) {
+    function has_uploaded_file($input)
+    {
+        return file_exists($input['tmp_name']) || is_uploaded_file($input['tmp_name']);
+    }
+}
+
 if (!function_exists('error_response')) {
     function error_response(string $message, mixed $errors = null, int $code = 404)
     {
