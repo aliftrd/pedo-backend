@@ -2,11 +2,9 @@
 session_start();
 require_once('vendor/autoload.php');
 
-use Illuminate\Support\Facades\Auth;
 use Rakit\Validation\Validator;
 use Helper\Flash;
 use Models\Admin;
-
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'POST':
@@ -20,7 +18,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
             $errors = $validation->errors();
 
             Flash::setFlash('error', $errors->firstOfAll()[array_key_first($errors->firstOfAll())]);
-            break;
+            return header('Location: ' . base_url('login.php'));
         }
 
         $email = $_POST['email'];
@@ -31,14 +29,14 @@ switch ($_SERVER['REQUEST_METHOD']) {
         if (!is_null($user) && password_verify($password, $user->password)) {
             $_SESSION['auth'] = $user->id;
 
-            header('Location: ' . base_url('home.php'));
-        } else {
-            Flash::setFlash('error', 'Kredensial tidak valid');
+            return header('Location: ' . base_url('home.php'));
         }
-        break;
+
+        Flash::setFlash('error', 'Kredensial tidak valid');
+        return header('Location: ' . base_url('login.php'));
     case 'GET':
         if (isset($_SESSION['auth'])) {
-            header('Location: ' . base_url('home.php'));
+            return header('Location: ' . base_url('home.php'));
         }
         break;
     default:
@@ -62,8 +60,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
     <title>Login</title>
 
     <!-- Styles -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/plugins/font-awesome/css/all.min.css" rel="stylesheet">
@@ -80,7 +77,6 @@ switch ($_SERVER['REQUEST_METHOD']) {
         </div>
     </div>
 
-
     <div class="container">
         <div class="login-container">
             <div class="row">
@@ -88,33 +84,24 @@ switch ($_SERVER['REQUEST_METHOD']) {
                     <div class="card login-box">
                         <div class="card-body">
                             <h5 class="card-title">Sign In</h5>
-
-                            <?php if (Flash::has('error')) : ?>
-                            <div class="alert alert-danger"><?= Flash::display('error') ?></div>
-                            <?php endif; ?>
+                            <?php include($_SERVER['DOCUMENT_ROOT'] . '/template/message.inc.php') ?>
                             <form method="post" id="formlogin">
                                 <div class="form-group">
-                                    <input type="email" name="email" id="email" class="form-control" required
-                                        placeholder="Email">
+                                    <input type="email" name="email" id="email" class="form-control" required placeholder="Email">
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" name="pass" id="pass" class="form-control" required
-                                        placeholder="Password">
+                                    <input type="password" name="pass" id="pass" class="form-control" required placeholder="Password">
                                 </div>
                                 <class="btn btn-primary float-right m-l-xxs>
                                     <input type="submit" name="Login" class="btn btn-primary float-right m-l-xxs">
                                     </class=>
                             </form>
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-
     </div>
-
 
 
     <!-- Javascripts -->

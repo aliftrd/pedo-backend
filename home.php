@@ -1,13 +1,3 @@
-<?php
-session_start();
-require_once('vendor/autoload.php');
-if (!isset($_SESSION['auth'])) {
-    header('Location:' . base_url('login.php'));
-}
-
-use Models\Admin;
-?>
-
 <?php include('template/header.inc.php') ?>
 <div class="lime-container">
     <div class="lime-body">
@@ -18,12 +8,7 @@ use Models\Admin;
                         <div class="card-body">
                             <div class="dashboard-info row">
                                 <div class="info-text col-md-6">
-                                    <h5 class="card-title">Halo, Selamat datang kembali
-
-                                        <?php $user = Admin::find($_SESSION['auth']);
-                                        echo $user->name; ?></h5>
-
-
+                                    <h5 class="card-title">Halo, Selamat datang kembali <?= $auth->name; ?></h5>
                                     <p>Get familiar with dashboard, here are some ways to get started.</p>
                                     <ul>
                                         <li>Check some stats for your website bellow</li>
@@ -58,8 +43,7 @@ use Models\Admin;
                             <h2 class="float-right">2.5 K</h2>
                             <p>From last week</p>
                             <div class="progress" style="height: 10px;">
-                                <div class="progress-bar bg-warning" role="progressbar" style="width: 2%"
-                                    aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-warning" role="progressbar" style="width: 2%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>
@@ -71,8 +55,7 @@ use Models\Admin;
                             <h2 class="float-right">14.3K</h2>
                             <p>Orders in waitlist</p>
                             <div class="progress" style="height: 10px;">
-                                <div class="progress-bar bg-info" role="progressbar" style="width: 60%"
-                                    aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>
@@ -84,8 +67,7 @@ use Models\Admin;
                             <h2 class="float-right">45.6$</h2>
                             <p>For last 30 days</p>
                             <div class="progress" style="height: 10px;">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 45%"
-                                    aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 45%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>

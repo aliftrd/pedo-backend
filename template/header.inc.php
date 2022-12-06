@@ -25,7 +25,7 @@ $auth = Admin::find($_SESSION['auth']);
     <!-- The above 6 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>Dashboard</title>
+    <title>Admin Panel - Pet Adoption</title>
 
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
@@ -42,11 +42,11 @@ $auth = Admin::find($_SESSION['auth']);
 </head>
 
 <body>
-    <div class='loader'>
+    <!-- <div class='loader'>
         <div class='spinner-grow text-primary' role='status'>
             <span class='sr-only'>Loading...</span>
         </div>
-    </div>
+    </div> -->
 
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/template/sidebar.inc.php'); ?>
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/template/topbar.inc.php'); ?>
