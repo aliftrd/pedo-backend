@@ -1,28 +1,17 @@
+<?php include($_SERVER['DOCUMENT_ROOT'] . '/template/header.inc.php') ?>
 <?php
-session_start();
-require_once($_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php');
-if (!isset($_SESSION['auth'])) {
-    header('Location:' . base_url('login.php'));
-}
 
-use Helper\Flash;
 use Models\AnimalType;
 
 $animalType = AnimalType::get();
 ?>
 
-<?php include($_SERVER['DOCUMENT_ROOT'] . '/template/header.inc.php') ?>
 <div class="lime-container">
     <div class="lime-body">
         <div class="container">
+            <?php include($_SERVER['DOCUMENT_ROOT'] . '/template/message.inc.php') ?>
             <div class="row">
                 <div class="col-md">
-                    <?php if (Flash::has('success')) : ?>
-                        <div class="alert alert-success"><?= Flash::display('success') ?></div>
-                    <?php endif; ?>
-                    <?php if (Flash::has('error')) : ?>
-                        <div class="alert alert-danger"><?= Flash::display('error') ?></div>
-                    <?php endif; ?>
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center">
@@ -46,7 +35,7 @@ $animalType = AnimalType::get();
                                                 <td><?= $type->title ?></td>
                                                 <td><?= $type->created_at ?></td>
                                                 <td>
-                                                    <a href="<?= base_url('animals/types/edit.php?id=' . $type->id) ?>" class="btn btn-sm btn-primary">Edit</a>
+                                                    <a href="<?= base_url('animals/types/edit.php?id=' . $type->id) ?>" class="btn btn-sm btn-warning">Edit</a>
                                                     <form action="<?= base_url('animals/types/hapus.php') ?>" method="POST" class="d-inline" onsubmit="return confirm('Anda yakin ingin menghapus?')">
                                                         <input type="hidden" name="_method" value="DELETE">
                                                         <input type="hidden" name="id" value="<?= $type->id ?>">

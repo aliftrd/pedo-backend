@@ -1,36 +1,37 @@
+<?php include($_SERVER['DOCUMENT_ROOT'] . '/template/header.inc.php') ?>
 <?php
-session_start();
-require_once($_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php');
-if (!isset($_SESSION['auth'])) {
-    header('Location:' . base_url('login.php'));
-}
 
 use Helper\Flash;
 use Models\AnimalBreed;
 use Rakit\Validation\Validator;
 
-if (isset($_POST['_method']) && $_POST['_method'] == 'PUT') {
-    $validator = new Validator;
-    $validation = $validator->validate($_POST, [
-        'title' => 'required',
-    ]);
+try {
+    $animalBreed = AnimalBreed::findOrFail($_GET['id']);
 
-    AnimalBreed::find($_GET['id'])->update([
-        'title' => $_POST['title'],
-    ]);
+    if (isset($_POST['_method']) && $_POST['_method'] == 'PUT') {
+        $validator = new Validator;
+        $validation = $validator->validate($_POST, [
+            'title' => 'required',
+        ]);
 
-    Flash::setFlash('success', 'Berhasil mengubah tipe hewan');
-    header('Location:' . base_url('animals/breeds/index.php'));
+        $animalBreed->update([
+            'title' => htmlspecialchars($_POST['title']),
+        ]);
+
+        Flash::setFlash('success', 'Berhasil mengubah ras hewan');
+        return header('Location:' . base_url('animals/breeds'));
+    }
+} catch (\Exception $th) {
+    Flash::setFlash('error', 'Ras hewan tidak ditemukan');
+    return header('Location:' . base_url('animals/breeds'));
 }
-
-$animalBreed = AnimalBreed::find($_GET['id']);
 ?>
 
 
-<?php include($_SERVER['DOCUMENT_ROOT'] . '/template/header.inc.php') ?>
 <div class="lime-container">
     <div class="lime-body">
         <div class="container">
+            <?php include($_SERVER['DOCUMENT_ROOT'] . '/template/message.inc.php') ?>
             <div class="row">
                 <div class="col-md">
                     <div class="card">

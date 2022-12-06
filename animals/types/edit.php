@@ -1,36 +1,36 @@
+<?php include($_SERVER['DOCUMENT_ROOT'] . '/template/header.inc.php') ?>
 <?php
-session_start();
-require_once($_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php');
-if (!isset($_SESSION['auth'])) {
-    header('Location:' . base_url('login.php'));
-}
 
 use Helper\Flash;
 use Models\AnimalType;
 use Rakit\Validation\Validator;
 
-if (isset($_POST['_method']) && $_POST['_method'] == 'PUT') {
-    $validator = new Validator;
-    $validation = $validator->validate($_POST, [
-        'title' => 'required',
-    ]);
+try {
+    $animalType = AnimalType::findOrFail($_GET['id']);
+    if (isset($_POST['_method']) && $_POST['_method'] == 'PUT') {
+        $validator = new Validator;
+        $validation = $validator->validate($_POST, [
+            'title' => 'required',
+        ]);
 
-    AnimalType::find($_GET['id'])->update([
-        'title' => $_POST['title'],
-    ]);
+        $animalType->update([
+            'title' => htmlspecialchars($_POST['title']),
+        ]);
 
-    Flash::setFlash('success', 'Berhasil mengubah tipe hewan');
-    header('Location:' . base_url('animals/types/index.php'));
+        Flash::setFlash('success', 'Berhasil mengubah tipe hewan');
+        return header('Location:' . base_url('animals/types'));
+    }
+} catch (\Exception $e) {
+    Flash::setFlash('error', 'Tipe hewan tidak ditemukan');
+    return header('Location:' . base_url('animals/types'));
 }
 
-$AnimalType = AnimalType::find($_GET['id']);
 ?>
 
-
-<?php include($_SERVER['DOCUMENT_ROOT'] . '/template/header.inc.php') ?>
 <div class="lime-container">
     <div class="lime-body">
         <div class="container">
+            <?php include($_SERVER['DOCUMENT_ROOT'] . '/template/message.inc.php') ?>
             <div class="row">
                 <div class="col-md">
                     <div class="card">
@@ -39,7 +39,7 @@ $AnimalType = AnimalType::find($_GET['id']);
                                 <input type="hidden" name="_method" value="PUT">
                                 <div class="form-group">
                                     <label for="title">Title</label>
-                                    <input type="text" class="form-control" id="title" name="title" value="<?= $AnimalType->title ?>" required>
+                                    <input type="text" class="form-control" id="title" name="title" value="<?= $animalType->title ?>" required>
                                 </div>
                                 <button class="btn btn-primary">Simpan</button>
                             </form>

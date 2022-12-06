@@ -7,9 +7,9 @@ use Models\AnimalBreed;
 
 if (isset($_POST['_method']) && $_POST['_method'] == 'DELETE') {
     AnimalBreed::destroy($_POST['id']);
-    Flash::setFlash('success', 'Berhasil menghapus tipe hewan');
+    Flash::setFlash('success', 'Berhasil menghapus ras hewan');
 
-    header('Location:' . base_url('animals/breeds/index.php'));
+    return header('Location:' . base_url('animals/breeds'));
 } else {
     return error_response('Method not allowed');
 }

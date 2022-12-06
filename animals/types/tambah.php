@@ -1,9 +1,5 @@
+<?php include($_SERVER['DOCUMENT_ROOT'] . '/template/header.inc.php') ?>
 <?php
-session_start();
-require_once($_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php');
-if (!isset($_SESSION['auth'])) {
-    header('Location:' . base_url('login.php'));
-}
 
 use Helper\Flash;
 use Models\AnimalType;
@@ -16,19 +12,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ]);
 
     AnimalType::create([
-        'title' => $_POST['title'],
+        'title' => htmlspecialchars($_POST['title']),
     ]);
 
     Flash::setFlash('success', 'Berhasil menambahkan tipe hewan');
-    header('Location:' . base_url('animals/types/index.php'));
+    return header('Location:' . base_url('animals/types'));
 }
 ?>
 
-
-<?php include($_SERVER['DOCUMENT_ROOT'] . '/template/header.inc.php') ?>
 <div class="lime-container">
     <div class="lime-body">
         <div class="container">
+            <?php include($_SERVER['DOCUMENT_ROOT'] . '/template/message.inc.php') ?>
             <div class="row">
                 <div class="col-md">
                     <div class="card">
