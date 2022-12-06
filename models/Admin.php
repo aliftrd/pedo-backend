@@ -6,11 +6,20 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/connection.php');
 
 use \Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Models\Article;
 
 class Admin extends Model
 {
-    public $timestamps = false;
+    use SoftDeletes;
+
+    const DEVELOPER = 'Developer';
+    const ADMIN = 'Admin';
+
+    const LEVELS = [
+        self::DEVELOPER => self::DEVELOPER,
+        self::ADMIN => self::ADMIN,
+    ];
 
     protected $fillable = [
         'name',
