@@ -13,7 +13,7 @@ class Storage
      */
     public static function upload(array $file, string $path = "storage")
     {
-        $path = $_SERVER['DOCUMENT_ROOT'] . $path; // storage path
+        $path = self::getRootPath($path); // storage path
         if (substr($path, -1) != "/") { // add trailing slash if not exists
             $path .= "/";
         }
@@ -52,5 +52,14 @@ class Storage
         }
 
         return false; // Return false if failed
+    }
+
+    public static function getRootPath(string $path)
+    {
+        if (substr($path, 0, 1) == '/') {
+            return $_SERVER['DOCUMENT_ROOT'] . substr($path, 1);
+        }
+
+        return $_SERVER['DOCUMENT_ROOT'] . $path;
     }
 }
