@@ -15,7 +15,6 @@ class Storage
         fwrite($filehandler, base64_decode($base64string)); // we could add validation here with ensuring count($data)>1
 
         fclose($filehandler); // clean up the file resource
-        chmod($filehandler, 0777); // set permission to 777
         return $filename;
     }
 
