@@ -44,10 +44,12 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
             $user = User::findOrFail($isLogin->user_id);
             $name = htmlspecialchars($_POST['name']);
-            $image = Storage::uploadFromBase64($_POST['image'], 'storage/images/user/avatar');
             $confirm_password = $_POST['confirm_password'];
 
             if ($_POST['image'] != null) {
+                $image = Storage::uploadFromBase64($_POST['image'], 'storage/images/user/avatar');
+
+                // Delete old image
                 if ($user->getRawOriginal('image') != 'default.jpg') {
                     Storage::delete('storage/images/user/avatar', $user->getRawOriginal('image'));
                 }
