@@ -15,6 +15,7 @@ class Storage
         fwrite($filehandler, base64_decode($base64string)); // we could add validation here with ensuring count($data)>1
 
         fclose($filehandler); // clean up the file resource
+        chmod($filehandler, 0777); // set permission to 777
         return $filename;
     }
 
@@ -62,7 +63,9 @@ class Storage
     public static function getRootPath(string $path)
     {
         // add trailing slash if not exists
-        if (substr($path, -1) != "/") return $path .= "/";
+        if (substr($path, -1) != "/") {
+            $path .= "/";
+        }
 
         // remove leading slash if exists
         if (substr($path, 0, 1) == '/') return $_SERVER['DOCUMENT_ROOT'] . substr($path, 1);
