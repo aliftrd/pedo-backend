@@ -25,10 +25,14 @@ switch ($_SERVER['REQUEST_METHOD']) {
         return success_response('Berhasil mengambil user', compact('token', 'user'), 200);
     case 'POST':
         try {
+            if (count($_POST) < 1) {
+                $_POST = json_decode(file_get_contents('php://input'), true) ?? [];
+            }
+
             $validator = new Validator;
             $validation = $validator->validate($_POST + $_FILES, [
                 'name' => 'required',
-                'image' => 'nullable|uploaded_file:0,2M,png,jpg,jpeg',
+                'image' => 'nullable',
                 'confirm_password' => 'required',
             ]);
 
