@@ -50,7 +50,7 @@ class Storage
      */
     public static function delete($path, $lastImageName): bool
     {
-        $uri = self::getRootPath($path); // storage path
+        $uri = self::getRootPath($path) . $lastImageName; // storage path
 
         if (file_exists($uri) && !empty($lastImageName)) { // Check if file exists
             return unlink($uri); // Delete file
