@@ -44,20 +44,13 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
             $user = User::findOrFail($isLogin->user_id);
             $name = htmlspecialchars($_POST['name']);
+            $image = Storage::uploadFromBase64($_POST['image'], 'storage/images/user/avatar');
             $confirm_password = $_POST['confirm_password'];
 
-            return response_json([
-                'name' => $name,
-                'image' => $_FILES['image'],
-                'confirm_password' => $confirm_password,
-            ]);
-
-            if (has_uploaded_file($_FILES['image'])) {
+            if ($_POST['image'] != null) {
                 if ($user->getRawOriginal('image') != 'default.jpg') {
                     Storage::delete('storage/images/user/avatar', $user->getRawOriginal('image'));
                 }
-
-                $file = Storage::upload($_FILES['image'], 'storage/images/user/avatar');
             }
 
             if (!password_verify($confirm_password, $user->password)) {
