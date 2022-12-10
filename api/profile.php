@@ -59,7 +59,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
             $user->update([
                 'name' => $name,
-                'image' => $file ?? $user->getRawOriginal('image'),
+                'image' => $image ?? $user->getRawOriginal('image'),
             ]);
 
             return success_response('Berhasil mengubah user', $user);
