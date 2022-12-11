@@ -46,6 +46,10 @@ switch ($_SERVER['REQUEST_METHOD']) {
             $name = htmlspecialchars($_POST['name']);
             $confirm_password = $_POST['confirm_password'];
 
+            if (!password_verify($confirm_password, $user->password)) {
+                return error_response('Password salah', null, 401);
+            }
+
             if ($_POST['image'] != null) {
                 $image = Storage::uploadFromBase64($_POST['image'], 'storage/images/user/avatar');
 
@@ -53,10 +57,6 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 if ($user->getRawOriginal('image') != 'default.jpg') {
                     Storage::delete('storage/images/user/avatar', $user->getRawOriginal('image'));
                 }
-            }
-
-            if (!password_verify($confirm_password, $user->password)) {
-                return error_response('Password salah', null, 401);
             }
 
             $user->update([
