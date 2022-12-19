@@ -50,7 +50,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 return error_response('Password salah', null, 401);
             }
 
-            if ($_POST['image'] != null) {
+            if (isset($_POST['image']) && $_POST['image'] != null) {
                 $image = Storage::uploadFromBase64($_POST['image'], 'storage/images/user/avatar');
 
                 // Delete old image
