@@ -7,8 +7,14 @@ class Storage
 
     public static function uploadFromBase64(string $base64string, string $path = "storage")
     {
+        $path = self::getRootPath($path); // storage path
+
         $filename = md5(microtime() . uniqid()) . '.jpg'; // Generate random filename
-        $outputfile = Storage::getRootPath($path) . $filename; //save as image.jpg in uploads/ folder
+        $outputfile = $path . $filename; //save as image.jpg in uploads/ folder
+
+        if (!file_exists($path)) {
+            mkdir($path, 0777, true); // Create directory if not exists
+        }
 
         $filehandler = fopen($outputfile, 'wb'); //file open with "w" mode treat as text file, and file open with "wb" mode treat as binary file
 

@@ -28,7 +28,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         }
 
         $validator = new Validator;
-        $imageValidatorRule = 'required|uploaded_file|max:2M|mimes:jpeg,png';
+        $imageValidatorRule = 'required';
         $validation = $validator->validate($_POST, [
             'pet' => $imageValidatorRule,
             'pet_with_you' => $imageValidatorRule,
