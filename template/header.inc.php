@@ -2,13 +2,13 @@
 ob_start();
 
 session_start();
-require_once($_SERVER['DOCUMENT_ROOT'] . 'vendor/autoload.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php');
 if (!isset($_SESSION['auth'])) {
     header('Location:' . base_url('login.php'));
 }
 
 use Models\Admin;
-
+    
 $auth = Admin::find($_SESSION['auth']);
 ?>
 
@@ -28,7 +28,8 @@ $auth = Admin::find($_SESSION['auth']);
     <title>Admin Panel - Pet Adoption</title>
 
     <!-- Styles -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap"
+        rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="<?= base_url('assets/plugins/bootstrap/css/bootstrap.min.css') ?>" rel="stylesheet">
     <link href="<?= base_url('assets/plugins/font-awesome/css/all.min.css') ?>" rel="stylesheet">
