@@ -9,20 +9,28 @@ use Rakit\Validation\Validator;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Models\UserUpgradeRequestImage;
 
+$authorization = get_bearer_token();
+if (!$authorization['status']) {
+    return error_response($authorization['message'], null, 401);
+}
+
+$user = UserAccessToken::where('token', $authorization['message']);
+if ($user->count() < 1) {
+    return error_response('Kredensial tidak valid', null, 401);
+}
+
 switch ($_SERVER['REQUEST_METHOD']) {
+    case 'GET':
+        $requestPending = UserUpgradeRequest::where('user_id', $user->first()->user_id)->where('status', 'Pending')->count();
+
+        if ($requestPending > 0) {
+            return error_response('Anda sudah memiliki request upgrade yang belum selesai', null, 400);
+        }
+
+        return success_response('Anda tidak memiliki request upgrade yang belum selesai', null, 200);
     case 'POST':
         if (count($_POST) < 1) {
             $_POST = json_decode(file_get_contents('php://input'), true) ?? [];
-        }
-
-        $authorization = get_bearer_token();
-        if (!$authorization['status']) {
-            return error_response($authorization['message'], null, 401);
-        }
-
-        $user = UserAccessToken::where('token', $authorization['message']);
-        if ($user->count() < 1) {
-            return error_response('Kredensial tidak valid', null, 401);
         }
 
         $requestPending = UserUpgradeRequest::where('user_id', $user->first()->user_id)->where('status', 'Pending')->count();
