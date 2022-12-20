@@ -11,6 +11,10 @@ use Models\UserUpgradeRequestImage;
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'POST':
+        if (count($_POST) < 1) {
+            $_POST = json_decode(file_get_contents('php://input'), true) ?? [];
+        }
+
         $authorization = get_bearer_token();
         if (!$authorization['status']) {
             return error_response($authorization['message'], null, 401);
