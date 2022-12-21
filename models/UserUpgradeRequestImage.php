@@ -7,20 +7,15 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/connection.php');
 
 use \Illuminate\Database\Eloquent\Model;
 
-class UserMeta extends Model
+class UserUpgradeRequestImage extends Model
 {
-    const PETOWNER = 'petowner';
-    const PETFINDER = 'petfinder';
-
     protected $fillable = [
-        'user_id',
-        'village_id',
-        'phone',
-        'type',
+        'user_upgrade_request_id',
+        'path',
     ];
 
-    public function user()
+    public function request()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(UserUpgradeRequest::class);
     }
 }

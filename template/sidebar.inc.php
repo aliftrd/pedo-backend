@@ -52,6 +52,7 @@
                     </li>
                     <li>
                         <a href="plugins-zoom.html">Image Zoom</a>
+                        <a href="<?= base_url('articles/categories') ?>">Kategori Artikel</a>
                     </li>
                 </ul>
             </li>

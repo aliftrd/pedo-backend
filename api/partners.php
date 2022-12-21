@@ -5,18 +5,19 @@ require_once('../vendor/autoload.php');
 use Models\Animal;
 use Models\UserAccessToken;
 
+$authorization = get_bearer_token();
+if (!$authorization['status']) {
+    return error_response($authorization['message'], null, 401);
+}
+
+$token = $authorization['message'];
+$isLogin = UserAccessToken::where('token', $token)->first();
+if (!$isLogin || is_null($isLogin)) {
+    return error_response('Kredensial tidak valid', null, 401);
+}
+
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
-        $authorization = get_bearer_token();
-        if (!$authorization['status']) {
-            return error_response($authorization['message'], null, 401);
-        }
-
-        $user = UserAccessToken::where('token', $authorization['message'])->count();
-        if ($user < 1) {
-            return error_response('Kredensial tidak valid', null, 401);
-        }
-
         $total = Animal::count(); // Total of records
         $current_page = $_GET['page'] ?? 1; // Page indicator
         $per_page = 1; // Limit per page
@@ -26,7 +27,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         $prev_page_url = $current_page < 2 ? null : base_url('api/animals.php?page=' .  ($current_page - 1)); // Previous page link
         $next_page_url = $current_page == $last_page ? null : base_url('api/animals.php?page=' . ($current_page + 1)); // Next page link
 
-        $animal_data = Animal::with(['user_meta.user'])
+        $animal_data = Animal::with(['user_meta.user'])->findByPartner($isLogin->user_id)->findByStatus($_GET['status'] ?? 'pending')
             ->offset($offset)
             ->limit($per_page)
             ->orderBy('id', 'DESC');
@@ -43,5 +44,5 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
         return success_response('Berhasil mengambil data', $data);
     default:
-        return error_response('Method Not Allowed');
+        return error_response('Method not allowed');
 }
