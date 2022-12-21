@@ -24,6 +24,21 @@ class Animal extends Model
         return $this->belongsTo(UserMeta::class);
     }
 
+    public function animal_type()
+    {
+        return $this->belongsTo(AnimalType::class);
+    }
+
+    public function animal_breed()
+    {
+        return $this->belongsTo(AnimalBreed::class);
+    }
+
+    public function animal_images()
+    {
+        return $this->hasMany(AnimalImage::class);
+    }
+
     public function scopeFindByPartner($query, $user_id)
     {
         return $query->whereHas('user_meta', function ($query) use ($user_id) {
