@@ -13,4 +13,9 @@ class AnimalImage extends Model
         'animal_id',
         'path',
     ];
+
+    public function getPathAttribute($value)
+    {
+        return base_url($value);
+    }
 }
