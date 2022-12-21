@@ -44,26 +44,14 @@
                 </ul>
             </li>
             <li>
-                <a href=""><i class="material-icons">code</i>Plugins<i
+                <a href=""><i class="material-icons">code</i>Artikel<i
                         class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="plugins-crop.html">Image Crop</a>
+                        <a href="<?= base_url('article') ?>">Artikel</a>
                     </li>
                     <li>
                         <a href="plugins-zoom.html">Image Zoom</a>
-                    </li>
-                    <li>
-                        <a href="plugins-select2.html">Select2</a>
-                    </li>
-                    <li>
-                        <a href="plugins-plupload.html">Plupload</a>
-                    </li>
-                    <li>
-                        <a href="plugins-toastr.html">Toastr</a>
-                    </li>
-                    <li>
-                        <a href="plugins-sliders.html">Range Sliders</a>
                     </li>
                 </ul>
             </li>
