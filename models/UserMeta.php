@@ -9,7 +9,15 @@ use \Illuminate\Database\Eloquent\Model;
 
 class UserMeta extends Model
 {
-    protected $fillable = [];
+    const PETOWNER = 'petowner';
+    const PETFINDER = 'petfinder';
+
+    protected $fillable = [
+        'user_id',
+        'village_id',
+        'phone',
+        'type',
+    ];
 
     public function user()
     {

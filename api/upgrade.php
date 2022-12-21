@@ -40,11 +40,12 @@ switch ($_SERVER['REQUEST_METHOD']) {
         }
 
         $validator = new Validator;
-        $imageValidatorRule = 'required';
         $validation = $validator->validate($_POST, [
-            'pet' => $imageValidatorRule,
-            'pet_with_you' => $imageValidatorRule,
-            'pet_home' => $imageValidatorRule,
+            'village_id' => 'required|numeric',
+            'phone' => 'required|numeric',
+            'pet' => 'required',
+            'pet_with_you' => 'required',
+            'pet_home' => 'required',
         ]);
 
         if ($validation->fails()) {
@@ -63,6 +64,8 @@ switch ($_SERVER['REQUEST_METHOD']) {
             Capsule::beginTransaction();
             $userUpgradeRequest = UserUpgradeRequest::create([
                 'user_id' => $user->first()->user_id,
+                'village_id' => $_POST['village_id'],
+                'phone' => $_POST['phone'],
                 'status' => UserUpgradeRequest::PENDING,
             ]);
 

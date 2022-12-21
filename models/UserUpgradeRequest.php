@@ -15,9 +15,21 @@ class UserUpgradeRequest extends Model
 
     protected $fillable = [
         'user_id',
+        'village_id',
+        'phone',
         'premise',
         'status',
     ];
+
+    public function getStatusAttribute($value)
+    {
+        return strtolower($value);
+    }
+
+    public function request_images()
+    {
+        return $this->hasMany(UserUpgradeRequestImage::class);
+    }
 
     public function user()
     {

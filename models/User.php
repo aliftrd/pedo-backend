@@ -9,6 +9,9 @@ use \Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
+    const PETOWNER = 'petowner';
+    const PETFINDER = 'petfinder';
+
     protected $fillable = [
         'name',
         'email',
