@@ -16,6 +16,6 @@ class AnimalImage extends Model
 
     public function getPathAttribute($value)
     {
-        return base_url($value);
+        return base_url('storage/images/animals/' . $value);
     }
 }
