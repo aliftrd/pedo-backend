@@ -26,7 +26,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         $prev_page_url = $current_page < 2 ? null : base_url('api/animals.php?page=' .  ($current_page - 1)); // Previous page link
         $next_page_url = $current_page == $last_page ? null : base_url('api/animals.php?page=' . ($current_page + 1)); // Next page link
 
-        $animal_data = Animal::with(['user_meta.user'])
+        $animal_data = Animal::with(['user_meta.user', 'animal_type', 'animal_breed', 'animal_images'])
             ->offset($offset)
             ->limit($per_page)
             ->orderBy('id', 'DESC');
