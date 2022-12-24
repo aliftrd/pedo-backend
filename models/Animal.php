@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Animal extends Model
 {
     const PENDING = 'pending';
-    const APPROVED = 'approved';
+    const APPROVED = 'accepted';
     const ADOPTED = 'adopted';
     const REJECTED = 'rejected';
 
