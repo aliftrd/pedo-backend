@@ -24,10 +24,12 @@ switch ($_SERVER['REQUEST_METHOD']) {
         $offset = ($current_page - 1) * $per_page; // Skip records
         $last_page = ceil($total / $per_page); // Total page
 
-        $prev_page_url = $current_page < 2 ? null : base_url('api/animals.php?page=' .  ($current_page - 1)); // Previous page link
-        $next_page_url = $current_page == $last_page ? null : base_url('api/animals.php?page=' . ($current_page + 1)); // Next page link
+        $prev_page_url = $current_page < 2 ? null : base_url('api/partners.php?page=' .  ($current_page - 1)); // Previous page link
+        $next_page_url = $current_page == $last_page ? null : base_url('api/partners.php?page=' . ($current_page + 1)); // Next page link
 
-        $animal_data = Animal::with(['user_meta.user'])->findByPartner($isLogin->user_id)->findByStatus($_GET['status'] ?? 'pending')
+        $animal_data = Animal::with(['user_meta.user', 'animal_images', 'animal_type', 'animal_breed'])
+            ->findByPartner($isLogin->user_id)
+            ->findByStatus($_GET['status'] ?? 'pending')
             ->offset($offset)
             ->limit($per_page)
             ->orderBy('id', 'DESC');

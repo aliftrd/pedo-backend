@@ -21,7 +21,12 @@ if ($user->count() < 1) {
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
-        $requestPending = UserUpgradeRequest::where('user_id', $user->first()->user_id)->where('status', 'Pending')->count();
+        $requestPending = UserUpgradeRequest::where('user_id', $user->first()->user_id)
+            ->where(function ($query) {
+                $query->where('status', 'Pending')
+                    ->orWhere('status', 'Accepted');
+            })
+            ->count();
 
         if ($requestPending > 0) {
             return error_response('Anda sudah memiliki request upgrade yang belum selesai', null, 400);

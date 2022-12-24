@@ -39,7 +39,7 @@ $upgradeRequest = UserUpgradeRequest::with(['user', 'request_images'])->findOrFa
                                     </tr>
                                 </table>
                             </div>
-                            <?php if ($upgradeRequest->status == 'Pending') : ?>
+                            <?php if ($upgradeRequest->status == 'pending') : ?>
                                 <div class="text-center">
                                     <form action="<?= base_url('users/upgrade/accept.php') ?>" method="POST" class="d-inline">
                                         <input type="hidden" name="id" value="<?= $upgradeRequest->id ?>">
