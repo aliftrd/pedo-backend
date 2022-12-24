@@ -7,13 +7,20 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/connection.php');
 
 use \Illuminate\Database\Eloquent\Model;
 use Models\Admin;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Article extends Model
 {
-    public $timestamps = false;
 
-    protected $hidden = [
+    use SoftDeletes;
+
+    protected $fillable = [
         'admin_id',
+        'title',
+        'slug',
+        'description',
+        'thumbnail',
     ];
 
     public function admin()
@@ -28,6 +35,6 @@ class Article extends Model
 
     public function getThumbnailAttribute($value)
     {
-        return base_url('storage/images/articles/thumbnail/' . $value);
+        return base_url('/storage/images/articles/thumbnail/' . $value);
     }
 }

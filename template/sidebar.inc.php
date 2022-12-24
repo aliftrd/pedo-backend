@@ -48,6 +48,9 @@
                         class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
                 <ul class="sub-menu">
                     <li>
+                        <a href="<?= base_url('articles') ?>">Artikel</a>
+                    </li>
+                    <li>
                         <a href="<?= base_url('articles/categories') ?>">Kategori Artikel</a>
                     </li>
                 </ul>
