@@ -34,6 +34,6 @@ class User extends Model
 
     public function getImageAttribute($value)
     {
-        return base_url('../storage/images/user/avatar' . $value);
+        return base_url('storage/images/user/avatar/' . $value);
     }
 }
