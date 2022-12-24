@@ -29,6 +29,9 @@
                     <li>
                         <a href="<?= base_url('admin') ?>"><i class="material-icons">person_outline</i>Master Admin</a>
                     </li>
+                    <li>
+                        <a href="<?= base_url('users') ?>"><i class="material-icons">person_outline</i>Master User</a>
+                    </li>
                 </ul>
             </li>
             <li>
