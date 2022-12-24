@@ -50,4 +50,9 @@ class Animal extends Model
     {
         return $query->where('status', $status);
     }
+
+    public function getImageAttribute($value)
+    {
+        return base_url('storage/images/animals/' . $value);
+    }
 }
