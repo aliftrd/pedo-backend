@@ -9,16 +9,33 @@ use Rakit\Validation\Validator;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Models\UserUpgradeRequestImage;
 
+$authorization = get_bearer_token();
+if (!$authorization['status']) {
+    return error_response($authorization['message'], null, 401);
+}
+
+$user = UserAccessToken::where('token', $authorization['message']);
+if ($user->count() < 1) {
+    return error_response('Kredensial tidak valid', null, 401);
+}
+
 switch ($_SERVER['REQUEST_METHOD']) {
-    case 'POST':
-        $authorization = get_bearer_token();
-        if (!$authorization['status']) {
-            return error_response($authorization['message'], null, 401);
+    case 'GET':
+        $requestPending = UserUpgradeRequest::where('user_id', $user->first()->user_id)
+            ->where(function ($query) {
+                $query->where('status', 'Pending')
+                    ->orWhere('status', 'Accepted');
+            })
+            ->count();
+
+        if ($requestPending > 0) {
+            return error_response('Anda sudah memiliki request upgrade yang belum selesai', null, 400);
         }
 
-        $user = UserAccessToken::where('token', $authorization['message']);
-        if ($user->count() < 1) {
-            return error_response('Kredensial tidak valid', null, 401);
+        return success_response('Anda tidak memiliki request upgrade yang belum selesai', null, 200);
+    case 'POST':
+        if (count($_POST) < 1) {
+            $_POST = json_decode(file_get_contents('php://input'), true) ?? [];
         }
 
         $requestPending = UserUpgradeRequest::where('user_id', $user->first()->user_id)->where('status', 'Pending')->count();
@@ -28,11 +45,12 @@ switch ($_SERVER['REQUEST_METHOD']) {
         }
 
         $validator = new Validator;
-        $imageValidatorRule = 'required|uploaded_file|max:2M|mimes:jpeg,png';
         $validation = $validator->validate($_POST, [
-            'pet' => $imageValidatorRule,
-            'pet_with_you' => $imageValidatorRule,
-            'pet_home' => $imageValidatorRule,
+            'village_id' => 'required|numeric',
+            'phone' => 'required|numeric',
+            'pet' => 'required',
+            'pet_with_you' => 'required',
+            'pet_home' => 'required',
         ]);
 
         if ($validation->fails()) {
@@ -51,6 +69,8 @@ switch ($_SERVER['REQUEST_METHOD']) {
             Capsule::beginTransaction();
             $userUpgradeRequest = UserUpgradeRequest::create([
                 'user_id' => $user->first()->user_id,
+                'village_id' => $_POST['village_id'],
+                'phone' => $_POST['phone'],
                 'status' => UserUpgradeRequest::PENDING,
             ]);
 

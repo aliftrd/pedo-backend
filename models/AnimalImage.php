@@ -7,20 +7,15 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/connection.php');
 
 use \Illuminate\Database\Eloquent\Model;
 
-class UserMeta extends Model
+class AnimalImage extends Model
 {
-    const PETOWNER = 'petowner';
-    const PETFINDER = 'petfinder';
-
     protected $fillable = [
-        'user_id',
-        'village_id',
-        'phone',
-        'type',
+        'animal_id',
+        'path',
     ];
 
-    public function user()
+    public function getPathAttribute($value)
     {
-        return $this->belongsTo(User::class);
+        return base_url($value);
     }
 }
