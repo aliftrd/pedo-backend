@@ -19,7 +19,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
         $total = Animal::count(); // Total of records
         $current_page = $_GET['page'] ?? 1; // Page indicator
-        $per_page = 1; // Limit per page
+        $per_page = 5; // Limit per page
         $offset = ($current_page - 1) * $per_page; // Skip records
         $last_page = ceil($total / $per_page); // Total page
 
@@ -27,6 +27,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         $next_page_url = $current_page == $last_page ? null : base_url('api/animals.php?page=' . ($current_page + 1)); // Next page link
 
         $animal_data = Animal::with(['user_meta.user', 'user_meta.village', 'animal_type', 'animal_breed', 'animal_images'])
+            ->active()
             ->offset($offset)
             ->limit($per_page)
             ->orderBy('id', 'DESC');

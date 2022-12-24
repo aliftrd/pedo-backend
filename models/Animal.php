@@ -39,6 +39,11 @@ class Animal extends Model
         return $this->hasMany(AnimalImage::class);
     }
 
+    public function scopeActive($query)
+    {
+        return $query->where('status', self::APPROVED);
+    }
+
     public function scopeFindByPartner($query, $user_id)
     {
         return $query->whereHas('user_meta', function ($query) use ($user_id) {
