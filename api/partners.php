@@ -27,7 +27,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         $prev_page_url = $current_page < 2 ? null : base_url('api/partners.php?page=' .  ($current_page - 1)); // Previous page link
         $next_page_url = $current_page == $last_page ? null : base_url('api/partners.php?page=' . ($current_page + 1)); // Next page link
 
-        $animal_data = Animal::with(['user_meta.user', 'animal_images', 'animal_type', 'animal_breed'])
+        $animal_data = Animal::with(['user_meta.user', 'user_meta.village', 'animal_images', 'animal_type', 'animal_breed'])
             ->findByPartner($isLogin->user_id)
             ->findByStatus($_GET['status'] ?? 'pending')
             ->offset($offset)
