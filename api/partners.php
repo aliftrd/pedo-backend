@@ -20,7 +20,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
         $total = Animal::count(); // Total of records
         $current_page = $_GET['page'] ?? 1; // Page indicator
-        $per_page = 1; // Limit per page
+        $per_page = 5; // Limit per page
         $offset = ($current_page - 1) * $per_page; // Skip records
         $last_page = ceil($total / $per_page); // Total page
 
