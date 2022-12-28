@@ -126,7 +126,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 ]);
             }
 
-            return success_response('Berhasil menambahkan data', $data, 201);
+            return success_response('Berhasil menambahkan data', 201);
         }
     default:
         return error_response('Method not allowed');
