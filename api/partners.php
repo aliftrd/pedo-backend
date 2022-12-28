@@ -119,7 +119,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
             ]);
 
             foreach ($_POST['images'] as $image) {
-                $images = Storage::uploadFromBase64($_POST['image'], 'storage/images/animals');
+                $images = Storage::uploadFromBase64($image, 'storage/images/animals');
                 AnimalImage::create([
                     'animal_id' => $animal->id,
                     'path' => $images
