@@ -17,7 +17,19 @@ class Animal extends Model
 
     use SoftDeletes;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'animal_type_id',
+        'animal_breed_id',
+        'user_meta_id',
+        'title',
+        'description',
+        'is_paid',
+        'price',
+        'gender',
+        'primary_color',
+        'secondary_color',
+        'status'
+    ];
 
     public function user_meta()
     {
