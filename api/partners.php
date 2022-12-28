@@ -2,8 +2,12 @@
 header('Content-Type: application/json');
 require_once('../vendor/autoload.php');
 
+use Helper\Storage;
 use Models\Animal;
+use Models\AnimalImage;
 use Models\UserAccessToken;
+use Models\UserMeta;
+use Rakit\Validation\Validator;
 
 $authorization = get_bearer_token();
 if (!$authorization['status']) {
@@ -45,6 +49,85 @@ switch ($_SERVER['REQUEST_METHOD']) {
         ];
 
         return success_response('Berhasil mengambil data', $data);
+    case 'POST':
+        if (count($_POST) < 1) {
+            $_POST = json_decode(file_get_contents('php://input'), true) ?? [];
+        }
+
+        if (isset($_GET['method']) && $_GET['method'] == 'update') {
+            $validator = new Validator;
+            $validation = $validator->validate($_POST, [
+                'id' => 'required',
+                'images' => 'required',
+                'animal_type_id' => 'required',
+                'animal_breed_id' => 'required',
+                'title' => 'required',
+                'description' => 'required',
+                'is_paid' => 'required',
+                'price' => 'required',
+                'gender' => 'required',
+                'primary_color' => 'required',
+                'secondary_color' => 'required'
+            ]);
+
+            if ($validation->fails()) {
+                $errors = $validation->errors();
+
+                return error_response('Error Validasi', $errors->firstOfAll(), 400);
+            }
+
+            $animal = Animal::findOrFail($_POST['id'])->update([
+                'title' => $_POST['title'],
+            ]);
+
+            return success_response('Berhasil mengubah data', $data, 202);
+        } else {
+            $validator = new Validator;
+            $validation = $validator->validate($_POST, [
+                'images' => 'required|array',
+                'animal_type_id' => 'required',
+                'animal_breed_id' => 'required',
+                'title' => 'required',
+                'description' => 'required',
+                'is_paid' => 'required|boolean',
+                'price' => 'required',
+                'gender' => 'required',
+                'primary_color' => 'required',
+                'secondary_color' => 'required'
+            ]);
+
+            if ($validation->fails()) {
+                $errors = $validation->errors();
+
+                return error_response('Error Validasi', $errors->firstOfAll(), 400);
+            }
+
+            $user_meta = UserMeta::where('user_id', $isLogin->user_id)->where('type', 'petowner')->first();
+
+            $animal = Animal::create([
+                'animal_type_id' => $_POST['animal_type_id'],
+                'animal_breed_id' => $_POST['animal_breed_id'],
+                'user_meta_id' => $user_meta->id,
+                'title' => $_POST['title'],
+                'description' => $_POST['description'],
+                'is_paid' => $_POST['is_paid'],
+                'price' => $_POST['price'],
+                'gender' => $_POST['gender'],
+                'primary_color' => $_POST['primary_color'],
+                'secondary_color' => $_POST['secondary_color'],
+                'status' => 'pending'
+            ]);
+
+            foreach ($_POST['images'] as $image) {
+                $images = Storage::uploadFromBase64($_POST['image'], 'storage/images/animals');
+                AnimalImage::create([
+                    'animal_id' => $animal->id,
+                    'path' => $images
+                ]);
+            }
+
+            return success_response('Berhasil menambahkan data', $data, 201);
+        }
     default:
         return error_response('Method not allowed');
 }
