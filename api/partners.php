@@ -155,7 +155,9 @@ function updateData()
 
     $animalImages = AnimalImage::where('animal_id', $_POST['id'])->get();
     foreach ($animalImages as $animalImage) {
-        Storage::delete('storage/images/animal', $animalImage->get);
+        if ($animalImage->path != 'default.jpg') {
+            Storage::delete('storage/images/animal', $animalImage->path);
+        }
         $animalImage->delete();
     }
 
