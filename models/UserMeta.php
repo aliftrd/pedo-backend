@@ -23,4 +23,9 @@ class UserMeta extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function village()
+    {
+        return $this->belongsTo(Village::class);
+    }
 }

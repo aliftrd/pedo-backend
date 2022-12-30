@@ -4,6 +4,7 @@ require_once('../../vendor/autoload.php');
 
 use Models\AnimalBreed;
 use Models\UserAccessToken;
+use Rakit\Validation\Validator;
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
@@ -17,7 +18,20 @@ switch ($_SERVER['REQUEST_METHOD']) {
             return error_response('Kredensial tidak valid', null, 401);
         }
 
-        $data = AnimalBreed::orderBy('title', 'ASC')->get();
+        $validator = new Validator();
+        $validation = $validator->validate($_GET, [
+            'animal_type_id' => 'required|numeric',
+        ]);
+
+        if ($validation->fails()) {
+            $errors = $validation->errors();
+
+            return error_response('Error Validasi', $errors->firstOfAll(), 400);
+        }
+
+        $data = AnimalBreed::getByAnimalType($_GET['animal_type_id'])
+            ->orderBy('title', 'ASC')
+            ->get();
 
         return success_response('Berhasil mengambil data', $data);
     default:
