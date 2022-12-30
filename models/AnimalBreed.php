@@ -13,6 +13,12 @@ class AnimalBreed extends Model
     use SoftDeletes;
 
     protected $fillable = [
+        'animal_type_id',
         'title',
     ];
+
+    public function animalType()
+    {
+        return $this->belongsTo(AnimalType::class);
+    }
 }

@@ -71,10 +71,10 @@
                     <li>
                         <a href="<?= base_url('faq') ?>">Frequently Asked Questions</a>
                     </li>
+                    <li>
+                    <a href="<?= base_url('report') ?>">Report</a>
+                    </li>
                 </ul>
-            </li>
-            <li>
-                <a href="#"><i class="material-icons">bookmark_border</i>Documentation</a>
             </li>
             <li>
                 <a href="#"><i class="material-icons">access_time</i>Change Log</a>
