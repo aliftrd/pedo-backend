@@ -1,10 +1,9 @@
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/template/header.inc.php') ?>
-<?php
-
-use Helper\Flash;
+<?php 
 use Models\Animal;
 
 $animals = Animal::with(['user_meta.user', 'animal_images', 'animal_type', 'animal_breed'])->where('status', 'Adopted')->get();
+
 ?>
 
 <div class="lime-container">
@@ -16,38 +15,33 @@ $animals = Animal::with(['user_meta.user', 'animal_images', 'animal_type', 'anim
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center">
-                                <h5 class="card-title">Ras Hewan</h5>
-                                <a href="<?= base_url('animals/breeds/tambah.php') ?>" class="btn btn-primary">Tambah</a>
+                                <h5 class="card-title">Report</h5>
+                                <a target="_blank" href="<?= base_url('report/cetak.php') ?>" class="btn btn-primary"> <i class="fa fa-file-pdf-o"></i> Cetak</a>
                             </div>
                             <table class="table table-borderless">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Ras Hewan</th>
-                                        <th>Tipe Hewan</th>
-                                        <th>Tanggal Dibuat</th>
-                                        <th>Aksi</th>
+                                        <th>Pet Owner</th>    
+                                        <th>Tipe Hewan</th>                                    
+                                        <th>Ras Hewan</th>                                        
+                                        <th>Nama Hewan</th>                                    
+                                        <th>Harga</th>                                            
+                                        <th>Tanggal Adopsi</th>              
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php if ($animals->count() > 0) : ?>
                                         <?php foreach ($animals as $animal) : ?>
-                                                                                                            
                                             <tr>
                                                 <td><?= $animal->id ?></td>
-                                                <td><?= $animal->animal_breed->title ?></td>
+                                                <td><?= $animal->user_meta->user->name ?></td>
                                                 <td><?= $animal->animal_type->title?></td>
-                                                <td><?= $animal->created_at ?></td>
-                                                <td>
-                                                    <a href="<?= base_url('animals/breeds/edit.php?id=' . $animal->id) ?>" class="btn btn-sm btn-warning">Edit</a>
-                                                    <form action="<?= base_url('animals/breeds/hapus.php') ?>" method="POST" class="d-inline" onsubmit="return confirm('Anda yakin ingin menghapus?')">
-                                                        <input type="hidden" name="_method" value="DELETE">
-                                                        <input type="hidden" name="id" value="<?= $animal->id ?>">
-                                                        <button class="btn btn-danger"> Hapus</button>
-                                                    </form>
-                                                </td>
+                                                <td><?= $animal->animal_breed->title?></td>
+                                                <td><?= $animal->title ?></td>
+                                                <td><?= $animal->price == 0 ? 'Gratis' : $animal->price ?></td>
+                                                <td><?= $animal->updated_at ?></td>                                
                                             </tr>
-                                        
                                         <?php endforeach ?>
                                     <?php else : ?>
                                         <tr>
