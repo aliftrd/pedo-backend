@@ -15,14 +15,7 @@ $upgradeRequests = UserUpgradeRequest::with(['user'])->get();
                     <div class="card">
                         <div class="card-body">
                             <div class="row align-items-center mb-4">
-                                <div class="col">
-                                    <h5 class="card-title">Pemintaan Mitra</h5>
-                                </div>
-                                <div class="col">
-                                    <?php if ($auth->level == 'Developer') : ?>
-                                        <a href="<?= base_url('admin/tambah.php') ?>" class="btn btn-primary float-right ">Tambah</a>
-                                    <?php endif; ?>
-                                </div>
+                                <h5 class="card-title">Pemintaan Mitra</h5>
                             </div>
                             <div class="table-responsive">
                                 <table class="table">
