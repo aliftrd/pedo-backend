@@ -23,7 +23,7 @@ use Helper\Storage;
             $errors = $validation->errors();
     
             Flash::setFlash('error', $errors->firstOfAll()[array_key_first($errors->firstOfAll())]);
-            return header('Location:' . base_url('articles/edit.php' . $_GET['id']));
+            return header('Location:' . base_url('articles/edit.php?id=' . $_GET['id']));
         }
 
         $title = htmlspecialchars($_POST['title']);
@@ -34,9 +34,9 @@ use Helper\Storage;
             $foto = $_FILES['thumbnail']['tmp_name'];
             $nama_file = md5($_FILES['foto']['name']) . '-' . time() .'.jpg';
             if ($article->getRawOriginal('thumbnail') != 'default.jpg'){
-                unlink('../storage/images/articles/thumbnail/' . $article->getRawOriginal('thumbnail'));
+                unlink('storage/images/articles/thumbnail/' . $article->getRawOriginal('thumbnail'));
             }
-            move_uploaded_file($foto, '../storage/images/articles/thumbnail/' . $nama_file);
+            move_uploaded_file($foto, 'storage/images/articles/thumbnail/' . $nama_file);
         }
 
 
@@ -48,7 +48,7 @@ use Helper\Storage;
         'title' =>  $title,
         'slug' => $slug,
         'description' => $description,
-        'thumbnail' => $nama_file ?? $title->getRawOriginal('thumbnail'),
+        'thumbnail' => $nama_file ?? $article->getRawOriginal('thumbnail'),
         ]);
         $article->categories()->sync($categories); 
 
