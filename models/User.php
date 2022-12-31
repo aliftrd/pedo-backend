@@ -6,11 +6,19 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/connection.php');
 
 use \Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Model
 {
-    const PETOWNER = 'petowner';
-    const PETFINDER = 'petfinder';
+    use SoftDeletes;
+
+    const PETFINDER = 'Petfinder';
+    const PETOWNER = 'Petowner';
+
+    const LEVELS = [
+        self::PETFINDER => self::PETFINDER,
+        self::PETOWNER => self::PETOWNER,
+    ];
 
     protected $fillable = [
         'name',

@@ -11,13 +11,25 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Animal extends Model
 {
     const PENDING = 'pending';
-    const APPROVED = 'approved';
+    const APPROVED = 'accepted';
     const ADOPTED = 'adopted';
     const REJECTED = 'rejected';
 
     use SoftDeletes;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'animal_type_id',
+        'animal_breed_id',
+        'user_meta_id',
+        'title',
+        'description',
+        'is_paid',
+        'price',
+        'gender',
+        'primary_color',
+        'secondary_color',
+        'status'
+    ];
 
     public function user_meta()
     {
@@ -37,6 +49,11 @@ class Animal extends Model
     public function animal_images()
     {
         return $this->hasMany(AnimalImage::class);
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', self::APPROVED);
     }
 
     public function scopeFindByPartner($query, $user_id)
