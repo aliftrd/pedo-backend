@@ -44,6 +44,9 @@
                     <li>
                         <a href="<?= base_url('animals/breeds') ?>">Ras Hewan</a>
                     </li>
+                    <li>
+                        <a href="<?= base_url('animals') ?>">Hewan</a>
+                    </li>
                 </ul>
             </li>
             <li>
@@ -56,10 +59,10 @@
                 </ul>
             </li>
             <li>
-                <a href="charts.html"><i class="material-icons">bar_chart</i>Charts</a>
+                <a href="<?= base_url('users/upgrade') ?>"><i class="material-icons">bar_chart</i>Permintaan Mitra</a>
             </li>
             <li>
-                <a href="forms.html"><i class="material-icons">input</i>Forms</a>
+                <a href="<?= base_url('animals/request') ?>"><i class="material-icons">input</i>Permintaan Hewan</a>
             </li>
             <li class="sidebar-title">
                 Other
