@@ -15,4 +15,8 @@ class AnimalType extends Model
     protected $fillable = [
         'title',
     ];
+    public function animalType()
+    {
+        return $this->belongsTo('AnimalType');
+    }
 }

@@ -7,16 +7,11 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/connection.php');
 
 use \Illuminate\Database\Eloquent\Model;
 
-class UserMeta extends Model
+class Notification extends Model
 {
-    const PETOWNER = 'petowner';
-    const PETFINDER = 'petfinder';
-
     protected $fillable = [
         'user_id',
-        'village_id',
-        'phone',
-        'type',
+        'description'
     ];
 
     public function user()
@@ -24,8 +19,8 @@ class UserMeta extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function village()
+    public function scopeByUser($query, $user_id)
     {
-        return $this->belongsTo(Village::class);
+        return $query->where('user_id', $user_id);
     }
 }

@@ -41,11 +41,11 @@ $upgradeRequest = UserUpgradeRequest::with(['user', 'request_images'])->findOrFa
                             </div>
                             <?php if ($upgradeRequest->status == 'pending') : ?>
                                 <div class="text-center">
-                                    <form action="<?= base_url('users/upgrade/accept.php') ?>" method="POST" class="d-inline">
+                                    <form action="<?= base_url('users/upgrade/accept.php') ?>" method="POST" class="d-inline" onsubmit="return confirm('Apakah anda yakin akan menerima permintaan ini?')">
                                         <input type="hidden" name="id" value="<?= $upgradeRequest->id ?>">
                                         <button type="submit" class="btn btn-success">Terima</button>
                                     </form>
-                                    <form action="<?= base_url('users/upgrade/decline.php') ?>" method="POST" class="d-inline">
+                                    <form action="<?= base_url('users/upgrade/decline.php') ?>" method="POST" class="d-inline" onsubmit="return confirm('Apakah anda yakin akan menolak permintaan ini?')">
                                         <input type="hidden" name="id" value="<?= $upgradeRequest->id ?>">
                                         <button type="submit" class="btn btn-danger">Tolak</button>
                                     </form>

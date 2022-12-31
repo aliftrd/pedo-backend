@@ -20,7 +20,8 @@
   "require": {
     "rakit/validation": "dev-master",
     "illuminate/database": "9.x-dev",
-    "illuminate/events": "9.x-dev"
+    "illuminate/events": "9.x-dev",
+    "dompdf/dompdf": "dev-master"
   },
   "license": "MIT",
   "minimum-stability": "dev"

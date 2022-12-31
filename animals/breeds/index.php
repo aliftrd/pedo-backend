@@ -77,7 +77,8 @@ $data = [
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Ras hewan</th>
+                                        <th>Ras Hewan</th>
+                                        <th>Tipe Hewan</th>
                                         <th>Tanggal Dibuat</th>
                                         <th>Aksi</th>
                                     </tr>

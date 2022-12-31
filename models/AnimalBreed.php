@@ -13,6 +13,17 @@ class AnimalBreed extends Model
     use SoftDeletes;
 
     protected $fillable = [
+        'animal_type_id',
         'title',
     ];
+
+    public function animalType()
+    {
+        return $this->belongsTo(AnimalType::class);
+    }
+    
+    public function scopeGetByAnimalType($query, $animal_type_id)
+    {
+        return $query->where('animal_type_id', $animal_type_id);
+    }
 }

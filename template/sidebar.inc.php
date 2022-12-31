@@ -54,6 +54,9 @@
                         class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
                 <ul class="sub-menu">
                     <li>
+                        <a href="<?= base_url('articles') ?>">Artikel</a>
+                    </li>
+                    <li>
                         <a href="<?= base_url('articles/categories') ?>">Kategori Artikel</a>
                     </li>
                 </ul>
@@ -74,10 +77,10 @@
                     <li>
                         <a href="<?= base_url('faq') ?>">Frequently Asked Questions</a>
                     </li>
+                    <li>
+                    <a href="<?= base_url('report') ?>">Report</a>
+                    </li>
                 </ul>
-            </li>
-            <li>
-                <a href="#"><i class="material-icons">bookmark_border</i>Documentation</a>
             </li>
             <li>
                 <a href="#"><i class="material-icons">access_time</i>Change Log</a>
