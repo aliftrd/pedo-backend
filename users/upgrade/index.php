@@ -28,7 +28,7 @@ $upgradeRequests = UserUpgradeRequest::with(['user'])->get();
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        <?php if ($upgradeRequests->count() > 1) : ?>
+                                        <?php if ($upgradeRequests->count() > 0) : ?>
 
                                             <?php foreach ($upgradeRequests as $upgradeRequest) : ?>
                                                 <tr>
