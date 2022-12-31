@@ -16,7 +16,7 @@ $upgradeRequests = UserUpgradeRequest::with(['user'])->get();
                         <div class="card-body">
                             <div class="row align-items-center mb-4">
                                 <div class="col">
-                                    <h5 class="card-title">Form Data Admin</h5>
+                                    <h5 class="card-title">Pemintaan Mitra</h5>
                                 </div>
                                 <div class="col">
                                     <?php if ($auth->level == 'Developer') : ?>
@@ -35,17 +35,23 @@ $upgradeRequests = UserUpgradeRequest::with(['user'])->get();
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach ($upgradeRequests as $upgradeRequest) : ?>
+                                        <?php if (count($data['data']) > 1) : ?>
+                                            <?php foreach ($upgradeRequests as $upgradeRequest) : ?>
+                                                <tr>
+                                                    <td> <?= $upgradeRequest->id ?></td>
+                                                    <td> <?= $upgradeRequest->user->name ?></td>
+                                                    <td> <span class="badge badge-<?= $upgradeRequest->status == 'pending' ? 'warning' : ($upgradeRequest->status == 'accepted' ? 'success' : 'danger') ?>"> <?= $upgradeRequest->getRawOriginal('status') ?></span></td>
+                                                    <td> <?= $upgradeRequest->created_at ?></td>
+                                                    <td>
+                                                        <a href="<?= base_url('users/upgrade/detail.php?id=' . $upgradeRequest->id) ?>" class="btn btn-primary">Detail</a>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        <?php else : ?>
                                             <tr>
-                                                <td> <?= $upgradeRequest->id ?></td>
-                                                <td> <?= $upgradeRequest->user->name ?></td>
-                                                <td> <span class="badge badge-<?= $upgradeRequest->status == 'pending' ? 'warning' : ($upgradeRequest->status == 'accepted' ? 'success' : 'danger') ?>"> <?= $upgradeRequest->getRawOriginal('status') ?></span></td>
-                                                <td> <?= $upgradeRequest->created_at ?></td>
-                                                <td>
-                                                    <a href="<?= base_url('users/upgrade/detail.php?id=' . $upgradeRequest->id) ?>" class="btn btn-primary">Detail</a>
-                                                </td>
+                                                <td colspan="5" class="text-center">Tidak ada data</td>
                                             </tr>
-                                        <?php endforeach; ?>
+                                        <?php endif; ?>
                                     </tbody>
                                 </table>
                             </div>

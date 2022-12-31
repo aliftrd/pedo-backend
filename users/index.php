@@ -83,23 +83,30 @@ $data = [
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach ($data['data'] as $user) : ?>
+                                        <?php if (count($data['data']) > 1) : ?>
+
+                                            <?php foreach ($data['data'] as $user) : ?>
+                                                <tr>
+                                                    <td> <?= $user->id ?></td>
+                                                    <td> <?= $user->name ?></td>
+                                                    <td> <?= $user->email ?></td>
+                                                    <td> <?= $user->level ?></td>
+                                                    <td> <?= $user->created_at ?></td>
+                                                    <td>
+                                                        <a href="<?= base_url('users/edit.php?id=' . $user->id) ?>" class="btn btn-warning">Ubah</a>
+                                                        <form action="<?= base_url('users/hapus.php') ?>" method="POST" class='d-inline' onsubmit="return confirm('Anda yakin ingin menghapus?')">
+                                                            <input type="hidden" name="_method" value="DELETE">
+                                                            <input type="hidden" name="id" value="<?= $user->id ?>">
+                                                            <button class="btn btn-danger">Hapus</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        <?php else : ?>
                                             <tr>
-                                                <td> <?= $user->id ?></td>
-                                                <td> <?= $user->name ?></td>
-                                                <td> <?= $user->email ?></td>
-                                                <td> <?= $user->level ?></td>
-                                                <td> <?= $user->created_at ?></td>
-                                                <td>
-                                                    <a href="<?= base_url('users/edit.php?id=' . $user->id) ?>" class="btn btn-warning">Ubah</a>
-                                                    <form action="<?= base_url('users/hapus.php') ?>" method="POST" class='d-inline' onsubmit="return confirm('Anda yakin ingin menghapus?')">
-                                                        <input type="hidden" name="_method" value="DELETE">
-                                                        <input type="hidden" name="id" value="<?= $user->id ?>">
-                                                        <button class="btn btn-danger">Hapus</button>
-                                                    </form>
-                                                </td>
+                                                <td colspan="6" class="text-center">Data tidak ditemukan</td>
                                             </tr>
-                                        <?php endforeach; ?>
+                                        <?php endif; ?>
                                     </tbody>
                                 </table>
                                 <nav aria-label="Page navigation example">

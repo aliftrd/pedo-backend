@@ -86,27 +86,34 @@ $data = [
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($data['data'] as $admin) : ?>
-                                        <tr>
-                                            <td> <?= $admin->id ?></td>
-                                            <td> <?= $admin->name ?></td>
-                                            <td> <?= $admin->email ?></td>
-                                            <td> <?= $admin->level ?></td>
-                                            <td> <?= $admin->created_at ?></td>
-                                            <td>
-                                                <?php if ($auth->level == 'Developer') : ?>
-                                                    <a href="<?= base_url('admin/edit.php?id=' . $admin->id) ?>" class="btn btn-warning">Ubah</a>
-                                                    <?php if ($admin->count() > 1) : ?>
-                                                        <form action="<?= base_url('admin/hapus.php') ?>" method="POST" class='d-inline' onsubmit="return confirm('Anda yakin ingin menghapus?')">
-                                                            <input type="hidden" name="_method" value="DELETE">
-                                                            <input type="hidden" name="id" value="<?= $admin->id ?>">
-                                                            <button class="btn btn-danger">Hapus</button>
-                                                        </form>
+                                    <?php if (count($data['data']) > 1) : ?>
+
+                                        <?php foreach ($data['data'] as $admin) : ?>
+                                            <tr>
+                                                <td> <?= $admin->id ?></td>
+                                                <td> <?= $admin->name ?></td>
+                                                <td> <?= $admin->email ?></td>
+                                                <td> <?= $admin->level ?></td>
+                                                <td> <?= $admin->created_at ?></td>
+                                                <td>
+                                                    <?php if ($auth->level == 'Developer') : ?>
+                                                        <a href="<?= base_url('admin/edit.php?id=' . $admin->id) ?>" class="btn btn-warning">Ubah</a>
+                                                        <?php if ($admin->count() > 1) : ?>
+                                                            <form action="<?= base_url('admin/hapus.php') ?>" method="POST" class='d-inline' onsubmit="return confirm('Anda yakin ingin menghapus?')">
+                                                                <input type="hidden" name="_method" value="DELETE">
+                                                                <input type="hidden" name="id" value="<?= $admin->id ?>">
+                                                                <button class="btn btn-danger">Hapus</button>
+                                                            </form>
+                                                        <?php endif; ?>
                                                     <?php endif; ?>
-                                                <?php endif; ?>
-                                            </td>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    <?php else : ?>
+                                        <tr>
+                                            <td colspan="6" class="text-center">Data tidak ditemukan</td>
                                         </tr>
-                                    <?php endforeach; ?>
+                                    <?php endif; ?>
                                 </tbody>
                             </table>
                         </div>
