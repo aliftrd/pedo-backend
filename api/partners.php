@@ -52,6 +52,8 @@ switch ($_SERVER['REQUEST_METHOD']) {
     case 'POST':
         if (isset($_GET['method']) && $_GET['method'] == 'update') {
             return updateData();
+        } else if (isset($_GET['method']) && $_GET['method'] == 'adopted') {
+            return adoptedData();
         } else {
             return insertData();
         }
@@ -112,6 +114,29 @@ function insertData()
     return success_response('Berhasil menambahkan data', 201);
 }
 
+function adoptedData()
+{
+    if (count($_POST) < 1) {
+        $_POST = json_decode(file_get_contents('php://input'), true) ?? [];
+    }
+
+    $validator = new Validator;
+    $validation = $validator->validate($_POST, [
+        'id' => 'required',
+    ]);
+
+    if ($validation->fails()) {
+        $errors = $validation->errors();
+
+        return error_response('Error Validasi', $errors->firstOfAll(), 400);
+    }
+
+    $animal = Animal::find($_POST['id']);
+    $animal->status = Animal::ADOPTED;
+    $animal->save();
+
+    return success_response('Berhasil mengubah data', 201);
+}
 
 function updateData()
 {
