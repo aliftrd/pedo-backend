@@ -63,9 +63,7 @@ $data = [
                                 <h5 class="card-title">Data Users</h5>
                                 <form action="<?= base_url('users/index.php') ?>">
                                     <div class="input-group mb-3">
-                                        <input type="text" class="form-control" name="search"
-                                            placeholder="Masukkan Nama User"
-                                            value="<?= !isset($_GET['search']) ? "" : $_GET['search'] ?>">
+                                        <input type="text" class="form-control" name="search" placeholder="Masukkan Nama User" value="<?= !isset($_GET['search']) ? "" : $_GET['search'] ?>">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary btn-sm" id="basic-addon2">Cari</button>
                                         </div>
@@ -86,37 +84,32 @@ $data = [
                                     </thead>
                                     <tbody>
                                         <?php foreach ($data['data'] as $user) : ?>
-                                        <tr>
-                                            <td> <?= $user->id ?></td>
-                                            <td> <?= $user->name ?></td>
-                                            <td> <?= $user->email ?></td>
-                                            <td> <?= $user->level ?></td>
-                                            <td> <?= $user->created_at ?></td>
-                                            <td>
-                                                <a href="<?= base_url('users/edit.php?id=' . $user->id) ?>"
-                                                    class="btn btn-warning">Ubah</a>
-                                                <form action="<?= base_url('users/hapus.php') ?>" method="POST"
-                                                    class='d-inline'
-                                                    onsubmit="return confirm('Anda yakin ingin menghapus?')">
-                                                    <input type="hidden" name="_method" value="DELETE">
-                                                    <input type="hidden" name="id" value="<?= $user->id ?>">
-                                                    <button class="btn btn-danger">Hapus</button>
-                                                </form>
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td> <?= $user->id ?></td>
+                                                <td> <?= $user->name ?></td>
+                                                <td> <?= $user->email ?></td>
+                                                <td> <?= $user->level ?></td>
+                                                <td> <?= $user->created_at ?></td>
+                                                <td>
+                                                    <a href="<?= base_url('users/edit.php?id=' . $user->id) ?>" class="btn btn-warning">Ubah</a>
+                                                    <form action="<?= base_url('users/hapus.php') ?>" method="POST" class='d-inline' onsubmit="return confirm('Anda yakin ingin menghapus?')">
+                                                        <input type="hidden" name="_method" value="DELETE">
+                                                        <input type="hidden" name="id" value="<?= $user->id ?>">
+                                                        <button class="btn btn-danger">Hapus</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
                                         <?php endforeach; ?>
                                     </tbody>
                                 </table>
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination justify-content-center">
                                         <?php if (!is_null($data['prev_page_url'])) : ?>
-                                        <li class="page-item"><a class="page-link"
-                                                href="<?= $data['prev_page_url'] ?>">Previous</a>
-                                        </li>
+                                            <li class="page-item"><a class="page-link" href="<?= $data['prev_page_url'] ?>">Previous</a>
+                                            </li>
                                         <?php endif; ?>
-                                        <?php if (!is_null($data['next_page_url'])) : ?>
-                                        <li class="page-item"><a class="page-link"
-                                                href="<?= $data['next_page_url'] ?>">Next</a></li>
+                                        <?php if (count($data['data']) > 1 || !is_null($data['next_page_url'])) : ?>
+                                            <li class="page-item"><a class="page-link" href="<?= $data['next_page_url'] ?>">Next</a></li>
                                         <?php endif; ?>
                                     </ul>
                                 </nav>

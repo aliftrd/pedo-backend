@@ -62,16 +62,13 @@ $data = [
                                 <h5 class="card-title">Kategori Artikel</h5>
                                 <form action="<?= base_url('articles/categories/index.php') ?>">
                                     <div class="input-group mb-3">
-                                        <input type="text" class="form-control" name="search"
-                                            placeholder="Masukkan judul"
-                                            value="<?= !isset($_GET['search']) ? "" : $_GET['search'] ?>">
+                                        <input type="text" class="form-control" name="search" placeholder="Masukkan judul" value="<?= !isset($_GET['search']) ? "" : $_GET['search'] ?>">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary btn-sm" id="basic-addon2">Cari</button>
                                         </div>
                                     </div>
                                 </form>
-                                <a href="<?= base_url('articles/categories/tambah.php') ?>"
-                                    class="btn btn-primary">Tambah</a>
+                                <a href="<?= base_url('articles/categories/tambah.php') ?>" class="btn btn-primary">Tambah</a>
                             </div>
                             <table class="table table-borderless">
                                 <thead>
@@ -84,41 +81,36 @@ $data = [
                                 </thead>
                                 <tbody>
                                     <?php if ($data['data']->count() > 0) : ?>
-                                    <?php foreach ($data['data'] as $article_categories) : ?>
-                                    <tr>
-                                        <td><?= $article_categories->id ?></td>
-                                        <td><?= $article_categories->title ?></td>
-                                        <td><?= $article_categories->created_at ?></td>
-                                        <td>
-                                            <a href="<?= base_url('articles/categories/edit.php?id=' . $article_categories->id) ?>"
-                                                class="btn btn-sm btn-warning">Edit</a>
-                                            <form action="<?= base_url('articles/categories/hapus.php') ?>"
-                                                method="POST" class="d-inline"
-                                                onsubmit="return confirm('Anda yakin ingin menghapus?')">
-                                                <input type="hidden" name="_method" value="DELETE">
-                                                <input type="hidden" name="id" value="<?= $article_categories->id ?>">
-                                                <button class="btn btn-danger"> Hapus</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                    <?php endforeach ?>
+                                        <?php foreach ($data['data'] as $article_categories) : ?>
+                                            <tr>
+                                                <td><?= $article_categories->id ?></td>
+                                                <td><?= $article_categories->title ?></td>
+                                                <td><?= $article_categories->created_at ?></td>
+                                                <td>
+                                                    <a href="<?= base_url('articles/categories/edit.php?id=' . $article_categories->id) ?>" class="btn btn-sm btn-warning">Edit</a>
+                                                    <form action="<?= base_url('articles/categories/hapus.php') ?>" method="POST" class="d-inline" onsubmit="return confirm('Anda yakin ingin menghapus?')">
+                                                        <input type="hidden" name="_method" value="DELETE">
+                                                        <input type="hidden" name="id" value="<?= $article_categories->id ?>">
+                                                        <button class="btn btn-danger"> Hapus</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach ?>
                                     <?php else : ?>
-                                    <tr>
-                                        <td colspan="5" class="text-center">Tidak ada data</td>
-                                    </tr>
+                                        <tr>
+                                            <td colspan="5" class="text-center">Tidak ada data</td>
+                                        </tr>
                                     <?php endif ?>
                                 </tbody>
                             </table>
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-center">
                                     <?php if (!is_null($data['prev_page_url'])) : ?>
-                                    <li class="page-item"><a class="page-link"
-                                            href="<?= $data['prev_page_url'] ?>">Previous</a>
-                                    </li>
+                                        <li class="page-item"><a class="page-link" href="<?= $data['prev_page_url'] ?>">Previous</a>
+                                        </li>
                                     <?php endif; ?>
-                                    <?php if (!is_null($data['next_page_url'])) : ?>
-                                    <li class="page-item"><a class="page-link"
-                                            href="<?= $data['next_page_url'] ?>">Next</a></li>
+                                    <?php if (count($data['data']) > 1 || !is_null($data['next_page_url'])) : ?>
+                                        <li class="page-item"><a class="page-link" href="<?= $data['next_page_url'] ?>">Next</a></li>
                                     <?php endif; ?>
                                 </ul>
                             </nav>

@@ -63,17 +63,14 @@ $data = [
                                 <h5 class="card-title">Data Admin</h5>
                                 <form action="<?= base_url('admin/index.php') ?>">
                                     <div class="input-group mb-3">
-                                        <input type="text" class="form-control" name="search"
-                                            placeholder="Masukkan Nama Admin"
-                                            value="<?= !isset($_GET['search']) ? "" : $_GET['search'] ?>">
+                                        <input type="text" class="form-control" name="search" placeholder="Masukkan Nama Admin" value="<?= !isset($_GET['search']) ? "" : $_GET['search'] ?>">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary btn-sm" id="basic-addon2">Cari</button>
                                         </div>
                                     </div>
                                 </form>
                                 <?php if ($auth->level == 'Developer') : ?>
-                                <a href="<?= base_url('admin/tambah.php') ?>"
-                                    class="btn btn-primary float-right ">Tambah</a>
+                                    <a href="<?= base_url('admin/tambah.php') ?>" class="btn btn-primary float-right ">Tambah</a>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -90,28 +87,25 @@ $data = [
                                 </thead>
                                 <tbody>
                                     <?php foreach ($data['data'] as $admin) : ?>
-                                    <tr>
-                                        <td> <?= $admin->id ?></td>
-                                        <td> <?= $admin->name ?></td>
-                                        <td> <?= $admin->email ?></td>
-                                        <td> <?= $admin->level ?></td>
-                                        <td> <?= $admin->created_at ?></td>
-                                        <td>
-                                            <?php if ($auth->level == 'Developer') : ?>
-                                            <a href="<?= base_url('admin/edit.php?id=' . $admin->id) ?>"
-                                                class="btn btn-warning">Ubah</a>
-                                            <?php if ($admin->count() > 1) : ?>
-                                            <form action="<?= base_url('admin/hapus.php') ?>" method="POST"
-                                                class='d-inline'
-                                                onsubmit="return confirm('Anda yakin ingin menghapus?')">
-                                                <input type="hidden" name="_method" value="DELETE">
-                                                <input type="hidden" name="id" value="<?= $admin->id ?>">
-                                                <button class="btn btn-danger">Hapus</button>
-                                            </form>
-                                            <?php endif; ?>
-                                            <?php endif; ?>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td> <?= $admin->id ?></td>
+                                            <td> <?= $admin->name ?></td>
+                                            <td> <?= $admin->email ?></td>
+                                            <td> <?= $admin->level ?></td>
+                                            <td> <?= $admin->created_at ?></td>
+                                            <td>
+                                                <?php if ($auth->level == 'Developer') : ?>
+                                                    <a href="<?= base_url('admin/edit.php?id=' . $admin->id) ?>" class="btn btn-warning">Ubah</a>
+                                                    <?php if ($admin->count() > 1) : ?>
+                                                        <form action="<?= base_url('admin/hapus.php') ?>" method="POST" class='d-inline' onsubmit="return confirm('Anda yakin ingin menghapus?')">
+                                                            <input type="hidden" name="_method" value="DELETE">
+                                                            <input type="hidden" name="id" value="<?= $admin->id ?>">
+                                                            <button class="btn btn-danger">Hapus</button>
+                                                        </form>
+                                                    <?php endif; ?>
+                                                <?php endif; ?>
+                                            </td>
+                                        </tr>
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>
@@ -119,13 +113,12 @@ $data = [
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-center">
                                 <?php if (!is_null($data['prev_page_url'])) : ?>
-                                <li class="page-item"><a class="page-link"
-                                        href="<?= $data['prev_page_url'] ?>">Previous</a>
-                                </li>
+                                    <li class="page-item"><a class="page-link" href="<?= $data['prev_page_url'] ?>">Previous</a>
+                                    </li>
                                 <?php endif; ?>
-                                <?php if (!is_null($data['next_page_url'])) : ?>
-                                <li class="page-item"><a class="page-link" href="<?= $data['next_page_url'] ?>">Next</a>
-                                </li>
+                                <?php if (count($data['data']) > 1 || !is_null($data['next_page_url'])) : ?>
+                                    <li class="page-item"><a class="page-link" href="<?= $data['next_page_url'] ?>">Next</a>
+                                    </li>
                                 <?php endif; ?>
                             </ul>
                         </nav>

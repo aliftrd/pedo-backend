@@ -31,7 +31,7 @@ if ($current_page == $last_page) {
 }
 
 
-$animal = AnimalBreed::when(isset($_GET['search']), function ($query) {
+$animal = AnimalBreed::with(['animalType'])->when(isset($_GET['search']), function ($query) {
     $query->where('title', 'like', '%' . $_GET['search'] . '%');
 })
     ->offset($offset)
@@ -62,16 +62,13 @@ $data = [
                                 <h5 class="card-title">Data Ras Hewan</h5>
                                 <form action="<?= base_url('animals/breeds/index.php') ?>">
                                     <div class="input-group mb-3">
-                                        <input type="text" class="form-control" name="search"
-                                            placeholder="Masukkan Ras Hewan"
-                                            value="<?= !isset($_GET['search']) ? "" : $_GET['search'] ?>">
+                                        <input type="text" class="form-control" name="search" placeholder="Masukkan Ras Hewan" value="<?= !isset($_GET['search']) ? "" : $_GET['search'] ?>">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary btn-sm" id="basic-addon2">Cari</button>
                                         </div>
                                     </div>
                                 </form>
-                                <a href="<?= base_url('animals/breeds/tambah.php') ?>"
-                                    class="btn btn-primary">Tambah</a>
+                                <a href="<?= base_url('animals/breeds/tambah.php') ?>" class="btn btn-primary">Tambah</a>
                             </div>
                             <table class="table table-borderless">
                                 <thead>
@@ -85,41 +82,37 @@ $data = [
                                 </thead>
                                 <tbody>
                                     <?php if ($data['data']->count() > 0) : ?>
-                                    <?php foreach ($data['data'] as $type) : ?>
-                                    <tr>
-                                        <td><?= $type->id ?></td>
-                                        <td><?= $type->title ?></td>
-                                        <td><?= $type->created_at ?></td>
-                                        <td>
-                                            <a href="<?= base_url('animals/breeds/edit.php?id=' . $type->id) ?>"
-                                                class="btn btn-sm btn-warning">Edit</a>
-                                            <form action="<?= base_url('animals/breeds/hapus.php') ?>" method="POST"
-                                                class="d-inline"
-                                                onsubmit="return confirm('Anda yakin ingin menghapus?')">
-                                                <input type="hidden" name="_method" value="DELETE">
-                                                <input type="hidden" name="id" value="<?= $type->id ?>">
-                                                <button class="btn btn-danger"> Hapus</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                    <?php endforeach ?>
+                                        <?php foreach ($data['data'] as $breed) : ?>
+                                            <tr>
+                                                <td><?= $breed->id ?></td>
+                                                <td><?= $breed->title ?></td>
+                                                <td><?= $breed->animalType->title ?></td>
+                                                <td><?= $breed->created_at ?></td>
+                                                <td>
+                                                    <a href="<?= base_url('animals/breeds/edit.php?id=' . $breed->id) ?>" class="btn btn-sm btn-warning">Edit</a>
+                                                    <form action="<?= base_url('animals/breeds/hapus.php') ?>" method="POST" class="d-inline" onsubmit="return confirm('Anda yakin ingin menghapus?')">
+                                                        <input type="hidden" name="_method" value="DELETE">
+                                                        <input type="hidden" name="id" value="<?= $breed->id ?>">
+                                                        <button class="btn btn-danger"> Hapus</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach ?>
                                     <?php else : ?>
-                                    <tr>
-                                        <td colspan="5" class="text-center">Tidak ada data</td>
-                                    </tr>
+                                        <tr>
+                                            <td colspan="5" class="text-center">Tidak ada data</td>
+                                        </tr>
                                     <?php endif ?>
                                 </tbody>
                             </table>
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-center">
                                     <?php if (!is_null($data['prev_page_url'])) : ?>
-                                    <li class="page-item"><a class="page-link"
-                                            href="<?= $data['prev_page_url'] ?>">Previous</a>
-                                    </li>
+                                        <li class="page-item"><a class="page-link" href="<?= $data['prev_page_url'] ?>">Previous</a>
+                                        </li>
                                     <?php endif; ?>
-                                    <?php if (!is_null($data['next_page_url'])) : ?>
-                                    <li class="page-item"><a class="page-link"
-                                            href="<?= $data['next_page_url'] ?>">Next</a></li>
+                                    <?php if (count($data['data']) > 1 || !is_null($data['next_page_url'])) : ?>
+                                        <li class="page-item"><a class="page-link" href="<?= $data['next_page_url'] ?>">Next</a></li>
                                     <?php endif; ?>
                                 </ul>
                             </nav>

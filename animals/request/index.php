@@ -52,19 +52,17 @@ $data = [
                                     </thead>
                                     <tbody>
                                         <?php foreach ($data['data'] as $animalRequests) : ?>
-                                        <tr>
-                                            <td> <?= $animalRequests->id ?></td>
-                                            <td> <?= $animalRequests->title ?></td>
-                                            <td> <?= $animalRequests->user_meta->user->name ?></td>
-                                            <td><span
-                                                    class="badge badge-<?= strtolower($animalRequests->status) == 'pending' ? 'warning' : (strtolower($animalRequests->status) == 'accepted' ? 'success' : 'danger') ?>">
-                                                    <?= $animalRequests->getRawOriginal('status') ?></span></td>
-                                            <td> <?= $animalRequests->created_at ?></td>
-                                            <td>
-                                                <a href="<?= base_url('animals/request/detail.php?id=' . $animalRequests->id) ?>"
-                                                    class="btn btn-primary">Detail</a>
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td> <?= $animalRequests->id ?></td>
+                                                <td> <?= $animalRequests->title ?></td>
+                                                <td> <?= $animalRequests->user_meta->user->name ?></td>
+                                                <td><span class="badge badge-<?= strtolower($animalRequests->status) == 'pending' ? 'warning' : (strtolower($animalRequests->status) == 'accepted' ? 'success' : 'danger') ?>">
+                                                        <?= $animalRequests->getRawOriginal('status') ?></span></td>
+                                                <td> <?= $animalRequests->created_at ?></td>
+                                                <td>
+                                                    <a href="<?= base_url('animals/request/detail.php?id=' . $animalRequests->id) ?>" class="btn btn-primary">Detail</a>
+                                                </td>
+                                            </tr>
                                         <?php endforeach; ?>
                                     </tbody>
                                 </table>
@@ -72,13 +70,11 @@ $data = [
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-center">
                                     <?php if (!is_null($data['prev_page_url'])) : ?>
-                                    <li class="page-item"><a class="page-link"
-                                            href="<?= $data['prev_page_url'] ?>">Previous</a>
-                                    </li>
+                                        <li class="page-item"><a class="page-link" href="<?= $data['prev_page_url'] ?>">Previous</a>
+                                        </li>
                                     <?php endif; ?>
-                                    <?php if (!is_null($data['next_page_url'])) : ?>
-                                    <li class="page-item"><a class="page-link"
-                                            href="<?= $data['next_page_url'] ?>">Next</a></li>
+                                    <?php if (count($data['data']) > 1 || !is_null($data['next_page_url'])) : ?>
+                                        <li class="page-item"><a class="page-link" href="<?= $data['next_page_url'] ?>">Next</a></li>
                                     <?php endif; ?>
                                 </ul>
                             </nav>
