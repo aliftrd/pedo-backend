@@ -3,11 +3,54 @@
 
 use Models\User;
 
-$users = User::when(isset($_GET['search']), function ($query) {
+$total = User::count(); // Total of records
+$current_page = $_GET['page'] ?? 1; // Page indicator
+$per_page = 10; // Limit per page
+$offset = ($current_page - 1) * $per_page; // Skip records
+$last_page = ceil($total / $per_page); // Total page
+
+// Previous page link
+if ($current_page < 2) {
+    $prev_page_url = null;
+} else {
+    $prev_page_url = 'users/index.php?page=' .  ($current_page - 1);
+    if (isset($_GET['search'])) {
+        $prev_page_url .= '&search=' . urlencode($_GET['search']);
+    }
+    $prev_page_url = base_url($prev_page_url);
+}
+
+if ($current_page == $last_page) {
+    $next_page_url = null;
+} else {
+    $next_page_url = 'users/index.php?page=' . ($current_page + 1);
+    if (isset($_GET['search'])) {
+        $next_page_url .= '&search=' . urlencode($_GET['search']);
+    }
+    $next_page_url = base_url($next_page_url);
+}
+
+
+$user = User::when(isset($_GET['search']), function ($query) {
     $query->where('name', 'like', '%' . $_GET['search'] . '%');
-})->get();
+})
+    ->offset($offset)
+    ->limit($per_page)
+    ->orderBy('id', 'DESC');
+
+$data = [
+    'current_page' => $current_page,
+    'data' => $user->get(),
+    'form' => $offset + 1,
+    'next_page_url' => $next_page_url,
+    'per_page' => $per_page,
+    'prev_page_url' => $prev_page_url,
+    'to' => $offset + $per_page,
+];
 
 ?>
+
+
 <div class="lime-container">
     <div class="lime-body">
         <div class="container">
@@ -16,26 +59,19 @@ $users = User::when(isset($_GET['search']), function ($query) {
                 <div class="col-xl">
                     <div class="card">
                         <div class="card-body">
-                            <div class="row align-items-center mb-4">
-                                <div class="col">
-                                    <h5 class="card-title">Form Data User</h5>
-                                </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="card-title">Data Users</h5>
                                 <form action="<?= base_url('users/index.php') ?>">
                                     <div class="input-group mb-3">
                                         <input type="text" class="form-control" name="search"
-                                            placeholder="Masukkan judul"
+                                            placeholder="Masukkan Nama User"
                                             value="<?= !isset($_GET['search']) ? "" : $_GET['search'] ?>">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary btn-sm" id="basic-addon2">Cari</button>
                                         </div>
                                     </div>
                                 </form>
-                                <div class="col">
-                                    <?php if ($auth->level == 'Developer') : ?>
-                                    <a href="<?= base_url('users/tambah.php') ?>"
-                                        class="btn btn-primary float-right ">Tambah</a>
-                                    <?php endif; ?>
-                                </div>
+                                <a href="<?= base_url('users/tambah.php') ?>" class="btn btn-primary">Tambah</a>
                             </div>
                             <div class="table-responsive">
                                 <table class="table">
@@ -49,7 +85,7 @@ $users = User::when(isset($_GET['search']), function ($query) {
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach ($users as $user) : ?>
+                                        <?php foreach ($data['data'] as $user) : ?>
                                         <tr>
                                             <td> <?= $user->id ?></td>
                                             <td> <?= $user->name ?></td>
@@ -57,7 +93,6 @@ $users = User::when(isset($_GET['search']), function ($query) {
                                             <td> <?= $user->level ?></td>
                                             <td> <?= $user->created_at ?></td>
                                             <td>
-                                                <?php if ($auth->level == 'Developer') : ?>
                                                 <a href="<?= base_url('users/edit.php?id=' . $user->id) ?>"
                                                     class="btn btn-warning">Ubah</a>
                                                 <form action="<?= base_url('users/hapus.php') ?>" method="POST"
@@ -67,12 +102,24 @@ $users = User::when(isset($_GET['search']), function ($query) {
                                                     <input type="hidden" name="id" value="<?= $user->id ?>">
                                                     <button class="btn btn-danger">Hapus</button>
                                                 </form>
-                                                <?php endif; ?>
                                             </td>
                                         </tr>
                                         <?php endforeach; ?>
                                     </tbody>
                                 </table>
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination justify-content-center">
+                                        <?php if (!is_null($data['prev_page_url'])) : ?>
+                                        <li class="page-item"><a class="page-link"
+                                                href="<?= $data['prev_page_url'] ?>">Previous</a>
+                                        </li>
+                                        <?php endif; ?>
+                                        <?php if (!is_null($data['next_page_url'])) : ?>
+                                        <li class="page-item"><a class="page-link"
+                                                href="<?= $data['next_page_url'] ?>">Next</a></li>
+                                        <?php endif; ?>
+                                    </ul>
+                                </nav>
                             </div>
                         </div>
                     </div>
