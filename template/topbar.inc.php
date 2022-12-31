@@ -20,7 +20,6 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-right">
                         <li><a class="dropdown-item" href="<?= base_url('profile.php') ?>">Account</a></li>
-                        <li><a class="dropdown-item" href="#">Settings</a></li>
                         <li class="divider"></li>
                         <li><a class="dropdown-item" href="<?= base_url('logout.php') ?>" class="btn btn-danger btn-md float-right"><span class="fa fa-sign-out"></span>Logout</a>
                         </li>

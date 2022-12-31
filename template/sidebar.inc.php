@@ -2,29 +2,16 @@
     <div class="lime-sidebar-inner slimscroll">
         <ul class="accordion-menu">
             <li class="sidebar-title">
-                Apps
+                Navigasi
             </li>
             <li>
                 <a href="<?= base_url('home.php') ?>"><i class="material-icons">dashboard</i>Dashboard</a>
-            </li>
-            <li>
-                <a href="<?= base_url('admin') ?>"><i class="material-icons">person_outline</i>Profile</a>
-            </li>
-            <li>
-                <a href="<?= base_url('forms.php') ?>"><i class="material-icons">inbox</i>Mailbox</a>
-            </li>
-            <li>
-                <a href="fr.html"><i class="material-icons">done_all</i>Todo</a>
-            </li>
-            <li>
-                <a href="file-manager.html"><i class="material-icons">cloud_queue</i>File Manager</a>
             </li>
             <li class="sidebar-title">
                 Fitur
             </li>
             <li>
-                <a href=""><i class="material-icons">apps</i>Master<i
-                        class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
+                <a href=""><i class="material-icons">apps</i>Master<i class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
                 <ul class="sub-menu">
                     <li>
                         <a href="<?= base_url('admin') ?>"><i class="material-icons">person_outline</i>Master Admin</a>
@@ -35,8 +22,7 @@
                 </ul>
             </li>
             <li>
-                <a href=""><i class="material-icons">apps</i>Data Hewan<i
-                        class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
+                <a href=""><i class="material-icons">apps</i>Data Hewan<i class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
                 <ul class="sub-menu">
                     <li>
                         <a href="<?= base_url('animals/types') ?>">Tipe Hewan</a>
@@ -50,8 +36,7 @@
                 </ul>
             </li>
             <li>
-                <a href=""><i class="material-icons">code</i>Artikel<i
-                        class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
+                <a href=""><i class="material-icons">code</i>Artikel<i class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
                 <ul class="sub-menu">
                     <li>
                         <a href="<?= base_url('articles') ?>">Artikel</a>
@@ -68,22 +53,18 @@
                 <a href="<?= base_url('animals/request') ?>"><i class="material-icons">input</i>Permintaan Hewan</a>
             </li>
             <li class="sidebar-title">
-                Other
+                Lainnya
             </li>
             <li>
-                <a href=""><i class="material-icons">star_border</i>Pages<i
-                        class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
+                <a href=""><i class="material-icons">star_border</i>Pages<i class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
                 <ul class="sub-menu">
                     <li>
                         <a href="<?= base_url('faq') ?>">Frequently Asked Questions</a>
                     </li>
                     <li>
-                    <a href="<?= base_url('report') ?>">Report</a>
+                        <a href="<?= base_url('report') ?>">Report</a>
                     </li>
                 </ul>
-            </li>
-            <li>
-                <a href="#"><i class="material-icons">access_time</i>Change Log</a>
             </li>
         </ul>
     </div>
