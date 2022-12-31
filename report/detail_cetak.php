@@ -33,12 +33,14 @@ $animals = Animal::with(['user_meta.user', 'animal_images', 'animal_type', 'anim
             }
         </style>
     </head>
+    <div class="row">
     <body>
         <div style="text-align:center">
             <h3>Laporan Adopsi Hewan</h3>
             <h3>Jumlah Keseluruhan Data = <?= $animals_count = Animal::with(['user_meta.user', 'animal_images', 'animal_type', 'animal_breed'])->where('status', 'Adopted')->count();?></h3>
         </div>
         <table id="table">
+            <thead>
         <tr>
             <th>ID</th>
             <th>Pet Owner</th>
@@ -48,9 +50,11 @@ $animals = Animal::with(['user_meta.user', 'animal_images', 'animal_type', 'anim
             <th>Harga</th>
             <th>Tanggal Adopsi</th>
         </tr>
+        </thead>
+        <tbody>
+        <?php if ($animals->count() > 0) : ?>
+            <?php foreach ($animals as $animal) : ?>
         <tr>
-            <?php if ($animals->count() > 0) : ?>
-                <?php foreach ($animals as $animal) : ?>
                     <td><?= $animal->id ?></td>
                     <td><?= $animal->user_meta->user->name ?></td>
                     <td><?= $animal->animal_type->title?></td>
@@ -59,12 +63,14 @@ $animals = Animal::with(['user_meta.user', 'animal_images', 'animal_type', 'anim
                     <td><?= $animal->price == 0 ? 'Gratis' : $animal->price ?></td>
                     <td><?= $animal->updated_at ?></td>
         </tr>
-                <?php endforeach ?>
-            <?php else : ?>
-        <tr>
-            <td colspan="5" class="text-center">Tidak ada data</td>
-        </tr>
+        <?php endforeach ?>
+        <?php else : ?>
+            <tr>
+                <td colspan="5" class="text-center">Tidak ada data</td>
+            </tr>
             <?php endif ?>
+        </tbody>
     </table>
 </body>
+</div>
 </html>
