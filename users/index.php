@@ -47,9 +47,6 @@ $data = [
     'prev_page_url' => $prev_page_url,
     'to' => $offset + $per_page,
 ];
-
-print_r(count($data['data']));
-die;
 ?>
 
 
