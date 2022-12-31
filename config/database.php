@@ -2,10 +2,10 @@
 
 return [
     'driver' => 'mysql',
-    'host' => '127.0.0.1',
+    'host' => 'petadoption.my.id',
     'port' => 3306,
-    'username' => 'root',
-    'password' => '',
+    'username' => 'pedo',
+    'password' => 'pedo',
     'database' => 'pedo',
     'charset' => 'utf8',
     'collation' => 'utf8_unicode_ci',
