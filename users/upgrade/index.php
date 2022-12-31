@@ -35,7 +35,8 @@ $upgradeRequests = UserUpgradeRequest::with(['user'])->get();
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        <?php if (count($data['data']) > 1) : ?>
+                                        <?php if ($upgradeRequests->count() > 1) : ?>
+
                                             <?php foreach ($upgradeRequests as $upgradeRequest) : ?>
                                                 <tr>
                                                     <td> <?= $upgradeRequest->id ?></td>

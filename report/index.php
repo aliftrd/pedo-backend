@@ -1,5 +1,6 @@
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/template/header.inc.php') ?>
-<?php 
+<?php
+
 use Models\Animal;
 
 $animals = Animal::with(['user_meta.user', 'animal_images', 'animal_type', 'animal_breed'])->where('status', 'Adopted')->get();
@@ -22,12 +23,12 @@ $animals = Animal::with(['user_meta.user', 'animal_images', 'animal_type', 'anim
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Pet Owner</th>    
-                                        <th>Tipe Hewan</th>                                    
-                                        <th>Ras Hewan</th>                                        
-                                        <th>Nama Hewan</th>                                    
-                                        <th>Harga</th>                                            
-                                        <th>Tanggal Adopsi</th>              
+                                        <th>Pet Owner</th>
+                                        <th>Tipe Hewan</th>
+                                        <th>Ras Hewan</th>
+                                        <th>Nama Hewan</th>
+                                        <th>Harga</th>
+                                        <th>Tanggal Adopsi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -36,16 +37,16 @@ $animals = Animal::with(['user_meta.user', 'animal_images', 'animal_type', 'anim
                                             <tr>
                                                 <td><?= $animal->id ?></td>
                                                 <td><?= $animal->user_meta->user->name ?></td>
-                                                <td><?= $animal->animal_type->title?></td>
-                                                <td><?= $animal->animal_breed->title?></td>
+                                                <td><?= $animal->animal_type->title ?></td>
+                                                <td><?= $animal->animal_breed->title ?></td>
                                                 <td><?= $animal->title ?></td>
                                                 <td><?= $animal->price == 0 ? 'Gratis' : $animal->price ?></td>
-                                                <td><?= $animal->updated_at ?></td>                                
+                                                <td><?= $animal->updated_at ?></td>
                                             </tr>
                                         <?php endforeach ?>
                                     <?php else : ?>
                                         <tr>
-                                            <td colspan="5" class="text-center">Tidak ada data</td>
+                                            <td colspan="7" class="text-center">Tidak ada data</td>
                                         </tr>
                                     <?php endif ?>
                                 </tbody>
