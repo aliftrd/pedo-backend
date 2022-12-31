@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $validation = $validator->validate($_POST + $_FILES, [
         'title' => 'required',
         'description' => 'required',
-        'thumbnail' => 'nullable|uploaded_file:0,1M,png,jpg,jpeg',
+        'thumbnail' => 'required|uploaded_file:0,1M,png,jpg,jpeg',
         'categories' => 'required',
     ]);
 
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $description = htmlspecialchars($_POST['description']);
     $categories = $_POST['categories']; 
     if (has_uploaded_file($_FILES['thumbnail'])) {
-        $file = Storage::upload($_FILES['thumbnail'], '../storage/images/articles/thumbnail');
+        $file = Storage::upload($_FILES['thumbnail'], 'storage/images/articles/thumbnail');
     }
 
     $slug = preg_replace('/[^a-z0-9]+/i', '-', trim(strtolower($_POST["title"])));
