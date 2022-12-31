@@ -72,7 +72,7 @@ $data = [
                                         <li class="page-item"><a class="page-link" href="<?= $data['prev_page_url'] ?>">Previous</a>
                                         </li>
                                     <?php endif; ?>
-                                    <?php if (count($data['data']) > 1 || !is_null($data['next_page_url'])) : ?>
+                                    <?php if (count($data['data']) > 1 && !is_null($data['next_page_url'])) : ?>
                                         <li class="page-item"><a class="page-link" href="<?= $data['next_page_url'] ?>">Next</a></li>
                                     <?php endif; ?>
                                 </ul>
