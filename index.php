@@ -110,8 +110,8 @@ $faqs = Faq::get();
                         </div>
                         <div class="col-md-6 p-0">
                             <div class="card service-card m-3" data-aos="zoom-out-left" data-aos-duration="400" data-aos-offset="30" data-aos-easing="ease-in-sine">
-                                <div class="card-body text-center"><img class="img-fluid" src="<?= base_url('assets/landing/img/credit_fill.svg') ?>" loading="lazy">
-                                    <p class="fw-semibold mt-2">Pembayaran<br>Anti Ribet</p>
+                                <div class="card-body text-center"><img class="img-fluid" src="<?= base_url('assets/landing/img/user-friendly.svg') ?>" loading="lazy">
+                                    <p class="fw-semibold mt-2">User<br>Friendly</p>
                                 </div>
                             </div>
                         </div>
