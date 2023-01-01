@@ -37,7 +37,7 @@ $faqs = Faq::get();
                     <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
                     <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonial</a></li>
                 </ul>
-                <button class="btn btn-primary btn-dark" type="button">Download</button>
+                <a class="btn btn-primary btn-dark" href="#download">Download</a>
             </div>
         </div>
     </nav>
@@ -48,7 +48,7 @@ $faqs = Faq::get();
                     <div style="max-width: 350px;">
                         <h1 class="text-uppercase hero-title" data-aos="zoom-out-right" data-aos-duration="400" data-aos-easing="ease-in-sine">Dapatkan hewan peliharaanmu sekarang</h1>
                         <p class="paragraph my-3" data-aos="zoom-out-right" data-aos-duration="600" data-aos-easing="ease-in-sine">Pet Adoption hadir dalam bentuk aplikasi yang dapat dengan mudah kamu unduh dengan tombol download dibawah<br></p>
-                        <a class="btn btn-lg btn-dark me-2" role="button" href="#" data-aos="zoom-out-right" data-aos-duration="800" data-aos-easing="ease-in-sine">Download</a>
+                        <a class="btn btn-lg btn-dark me-2" role="button" href="#download" data-aos="zoom-out-right" data-aos-duration="800" data-aos-easing="ease-in-sine">Download</a>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -191,19 +191,16 @@ $faqs = Faq::get();
         </div>
     </div>
     <div id="reff-section" class="p-4">
-        <div class="container">
+        <div class="container" id="download">
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <h2 class="text-uppercase title">Ayo Bergabung Dengan Kami Sekarang</h2>
                     <p>Dapatkan anabulmu yang lucu dengan mudah, ayo bergabung sekarang.<br></p>
                 </div>
                 <div class="col-md-6">
-                    <div class="d-flex">
-                        <a href="#">
+                    <div class="d-flex justify-content-end">
+                        <a target="_blank" href="https://drive.google.com/file/d/11uUNraK0CyefJeHOdPdUbWW7pSzolUR5/view?usp=share_link">
                             <img class="w-100 p-3" src="<?= base_url('assets/landing/img/google-play.png') ?>">
-                        </a>
-                        <a href="#">
-                            <img class="w-100 p-3" src="<?= base_url('assets/landing/img/app-store.png') ?>">
                         </a>
                     </div>
                 </div>
