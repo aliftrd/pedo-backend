@@ -43,25 +43,30 @@ $animalRequests = Animal::with(['user_meta.user'])->findOrFail($_GET['id']);
                                     </tr>
                                     <tr>
                                         <th>Status</th>
-                                        <td><span
-                                                class="badge badge-<?= strtolower($animalRequests->status) == 'pending' ? 'warning' : (strtolower($animalRequests->status) == 'accepted' ? 'success' : 'danger') ?>">
+                                        <td><span class="badge badge-<?= strtolower($animalRequests->status) == 'pending' ? 'warning' : (strtolower($animalRequests->status) == 'accepted' ? 'success' : 'danger') ?>">
                                                 <?= $animalRequests->getRawOriginal('status') ?></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Images</th>
+                                        <td>
+                                            <?php foreach ($animalRequests->animal_images as $image) : ?>
+                                                <img src="<?= $image->path ?>" alt="Image" class="img-thumbnail" style="width: 200px; height: 200px;object-fit: cover;margin: .8em;">
+                                            <?php endforeach; ?>
+                                        </td>
                                     </tr>
                                 </table>
                             </div>
                             <?php if (strtolower($animalRequests->status) == 'pending') : ?>
-                            <div class="text-center">
-                                <form action="<?= base_url('animals/request/accept.php') ?>" method="POST"
-                                    class="d-inline">
-                                    <input type="hidden" name="id" value="<?= $animalRequests->id ?>">
-                                    <button type="submit" class="btn btn-success">Terima</button>
-                                </form>
-                                <form action="<?= base_url('animals/request/decline.php') ?>" method="POST"
-                                    class="d-inline">
-                                    <input type="hidden" name="id" value="<?= $animalRequests->id ?>">
-                                    <button type="submit" class="btn btn-danger">Tolak</button>
-                                </form>
-                            </div>
+                                <div class="text-center">
+                                    <form action="<?= base_url('animals/request/accept.php') ?>" method="POST" class="d-inline">
+                                        <input type="hidden" name="id" value="<?= $animalRequests->id ?>">
+                                        <button type="submit" class="btn btn-success">Terima</button>
+                                    </form>
+                                    <form action="<?= base_url('animals/request/decline.php') ?>" method="POST" class="d-inline">
+                                        <input type="hidden" name="id" value="<?= $animalRequests->id ?>">
+                                        <button type="submit" class="btn btn-danger">Tolak</button>
+                                    </form>
+                                </div>
                             <?php endif; ?>
                         </div>
                     </div>
