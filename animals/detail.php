@@ -3,7 +3,7 @@
 
 use Models\Animal;
 
-$animalRequests = Animal::with(['user_meta'])->findOrFail($_GET['id']);
+$animalRequests = Animal::with(['user_meta', 'animal_images'])->findOrFail($_GET['id']);
 
 ?>
 <div class="lime-container">
@@ -43,33 +43,30 @@ $animalRequests = Animal::with(['user_meta'])->findOrFail($_GET['id']);
                                     </tr>
                                     <tr>
                                         <th>Status</th>
-                                        <td><span
-                                                class="badge badge-<?= strtolower($animalRequests->status) == 'pending' ? 'warning' : (strtolower($animalRequests->status) == 'accepted' ? 'success' : 'danger') ?>">
+                                        <td><span class="badge badge-<?= strtolower($animalRequests->status) == 'pending' ? 'warning' : (strtolower($animalRequests->status) == 'accepted' ? 'success' : 'danger') ?>">
                                                 <?= $animalRequests->getRawOriginal('status') ?></span></td>
                                     </tr>
                                     <tr>
                                         <th>Images</th>
                                         <td>
-                                            <?php foreach ($upgradeRequest->request_images as $image) : ?>
-                                            <img src="<?= base_url('storage/images/user/upgrade/' . $image->path) ?>"
-                                                alt="Image" class="img-thumbnail"
-                                                style="width: 200px; height: 200px;object-fit: cover;margin: .8em;">
+                                            <?php foreach ($animalRequests->animal_images as $image) : ?>
+                                                <img src="<?= base_url('storage/images/user/upgrade/' . $image->path) ?>" alt="Image" class="img-thumbnail" style="width: 200px; height: 200px;object-fit: cover;margin: .8em;">
                                             <?php endforeach; ?>
                                         </td>
                                     </tr>
                                 </table>
                             </div>
                             <?php if (strtolower($animalRequests->status) == 'pending') : ?>
-                            <div class="text-center">
-                                <form action="<?= base_url('animals/accept.php') ?>" method="POST" class="d-inline">
-                                    <input type="hidden" name="id" value="<?= $animalRequests->id ?>">
-                                    <button type="submit" class="btn btn-success">Terima</button>
-                                </form>
-                                <form action="<?= base_url('animals/decline.php') ?>" method="POST" class="d-inline">
-                                    <input type="hidden" name="id" value="<?= $animalRequests->id ?>">
-                                    <button type="submit" class="btn btn-danger">Tolak</button>
-                                </form>
-                            </div>
+                                <div class="text-center">
+                                    <form action="<?= base_url('animals/accept.php') ?>" method="POST" class="d-inline">
+                                        <input type="hidden" name="id" value="<?= $animalRequests->id ?>">
+                                        <button type="submit" class="btn btn-success">Terima</button>
+                                    </form>
+                                    <form action="<?= base_url('animals/decline.php') ?>" method="POST" class="d-inline">
+                                        <input type="hidden" name="id" value="<?= $animalRequests->id ?>">
+                                        <button type="submit" class="btn btn-danger">Tolak</button>
+                                    </form>
+                                </div>
                             <?php endif; ?>
                         </div>
                     </div>
