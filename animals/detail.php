@@ -50,7 +50,7 @@ $animalRequests = Animal::with(['user_meta', 'animal_images'])->findOrFail($_GET
                                         <th>Images</th>
                                         <td>
                                             <?php foreach ($animalRequests->animal_images as $image) : ?>
-                                                <img src="<?= base_url('storage/images/user/upgrade/' . $image->path) ?>" alt="Image" class="img-thumbnail" style="width: 200px; height: 200px;object-fit: cover;margin: .8em;">
+                                                <img src="<?= $image->path ?>" alt="Image" class="img-thumbnail" style="width: 200px; height: 200px;object-fit: cover;margin: .8em;">
                                             <?php endforeach; ?>
                                         </td>
                                     </tr>
